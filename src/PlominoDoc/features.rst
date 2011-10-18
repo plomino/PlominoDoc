@@ -570,13 +570,13 @@ object: ``plominoContext.REQUEST.get('myfield')``.
 Page
 ----
 
-Like a *Search* form, a *Page* form cannot be used to save documents;
-moreover *Page* forms do not display any action bar.
+Like a *Search* form, a *Page* form cannot be used to save documents through
+the web, since *Page* forms do not display any action bar. (Formulas could
+however still call ``save`` on document using a Page form.)
 
-Nevertheless, like any form, it can contain computed fields, actions
-(inserted in the form layout), and hide-when formulas, so it is a good
-way to build navigation pages, custom menus, or information pages (like
-reports, etc.).
+Like any form, it can contain computed fields, actions (inserted in the form
+layout), and hide-when formulas, so it is a good way to build navigation
+pages, custom menus, or information pages (like reports, etc.).
 
 Example:
 
