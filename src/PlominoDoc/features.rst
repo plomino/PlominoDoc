@@ -189,30 +189,36 @@ and insert it in the ``frmBook`` form:
 Validation
 ----------
 
-By default, Plomino validates fields according to their type (for
-instance, letters are not allowed in a Number field).
+By default, Plomino validates fields according to their type (for instance,
+letters are not allowed in a *Number* field).
 
 You can also add more validation criteria in the field's **Validation**
 tab:
 
-- a field can be mandatory: if the field is empty when the document is
+- a field can be **mandatory**: if the field is empty when the document is
   saved, Plomino does not save the document and displays an alert to the
   user.
 
-- you can enter a formula to implement a specific validation rule (which
-  may depend on other fields values).
+- you can enter a formula to implement a specific **validation rule** (which
+  may depend on other field values).
 
-For instance, in a *Purchase request* application, the maximum
-authorised amount is 1000 euros. You would enter the following formula
-in the TotalAmount field::
+For instance, in a *Purchase request* application, the maximum authorised
+amount is 1000 euros. You would enter the following formula in the
+``TotalAmount`` field::
 
     if plominoDocument.TotalAmount>1000: 
         return 'The total amount must be under 1000 euros` 
     else: 
         return '`
 
-Note: the formula must return an empty string if validation succeeds or
-an error message if it is not.
+If you need to compare the submitted values to the currently stored state of
+the document, you need to look up the stored document first::
+
+    db = plominoDocument.getParentDatabase()
+    plominoDocument_stored = db.getDocument(plominoDocument.id)
+
+.. Note:: the formula must return an empty string if validation succeeds or
+   an error message if it does not.
 
 Doclinks
 --------
