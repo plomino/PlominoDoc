@@ -809,7 +809,7 @@ Agents
 ======
 
 It might be useful to launch the same processing from different places
-in the application (views action, forms action). To avoid duplicate=ing
+in the application (views action, forms action). To avoid duplicating
 the code, you can implement the code in an *agent*.
 
 Select ``Plomino: agent`` in the **Add item** Plone menu, and enter an
@@ -820,11 +820,20 @@ manager rights to regular users.
 
 The agent can be executed (from an action) using the ``runAgent()`` method::
 
-    db=plominoDocument.getParentDatabase() 
+    db = plominoDocument.getParentDatabase() 
     db.MyAgent.runAgent()
 
-Note: this method can take ``REQUEST`` as parameter, which allows
-variables in the querystring to be read and redirection to be performed.
+Note: this method can take ``REQUEST`` as parameter (this has to be the
+REQUEST object), which allows variables in the querystring to be read and
+redirection to be controlled (using a ``REDIRECT`` key on the request).
+
+The agent can also be executed from Python formulas by calling it directly::
+
+    db = plominoDocument.getParentDatabase() 
+    db.MyAgent('one', 'two', 'three')
+
+Note: this method can take optional positional arguments. It does not
+redirect.
 
 If you install `ZpCron <http://old.zope.org/Members/janik/ZpCron>`_
 on your Zope instance, an agent can also be scheduled. You specify when the

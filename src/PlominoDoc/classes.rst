@@ -289,3 +289,7 @@ PlominoAgent
     runs the agent. If REQUEST is provided, there is a redirection to
     the database home page, unless the REQUEST contains a REDIRECT key
     If so, the formula returned value is used as the redirection URL.
+
+`__call__(*args)`
+    if agents are called from Python code, they can take positional
+    arguments.
