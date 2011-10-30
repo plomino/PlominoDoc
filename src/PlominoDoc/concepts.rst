@@ -24,8 +24,9 @@ inserts the fields wherever he wants.
 
 A form can also contain some action buttons to trigger specific processing.
 
-Forms are not always used to create or view documents --- sometimes they are
-used to provide specific features (see `Search forms`_, and `Page forms`_).
+Forms are not always used to create or view documents |---| sometimes they
+are used to provide specific features (see `Search forms`_, and 
+`Page forms`_).
 
 Documents
 =========
@@ -82,3 +83,4 @@ The design defines the structure of the application, and it is created by
 the application designer. It differs from the documents, which are the
 application data, created by the users.
 
+.. |---| unicode:: U+02014 .. em dash
