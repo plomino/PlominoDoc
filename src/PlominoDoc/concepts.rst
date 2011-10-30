@@ -5,7 +5,7 @@ Concepts
 Plomino database
 ================
 
-A Plomino *application* is supported by a Plomino *database*.
+A Plomino *application* is supported by one or more Plomino *databases*.
 
 The Plomino database is the Plone object which contains the application
 data (i.e. the Documents_), and its structure (i.e. the
