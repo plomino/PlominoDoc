@@ -17,7 +17,7 @@ and add the following in the ``eggs`` and ``zcml`` sections::
 
     eggs =
          ...
-         Plomino
+         Products.CMFPlomino
          plomino.tinymce
          
     zcml =
