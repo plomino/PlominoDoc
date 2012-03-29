@@ -207,7 +207,7 @@ You can generate a view automatically from a form:
 This generates a view which:
 
 - selects all the documents that were created or last edited using the
-``frmBook`` form,
+  ``frmBook`` form,
 - creates a column for each field on the form (file attachments and rich
   text fields are skipped), and it also 
 - inserts an *Add new* action.

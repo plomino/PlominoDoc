@@ -38,4 +38,4 @@ Here you should see ``Plomino`` and ``plomino.tinymce`` in the list of
 installable products. Select them and click *Install*.
 
 Once done, Plomino is installed, so when you are in a folder, you can add a 
-new Plomino database using the Plone *"Add new..."* menu.
+new Plomino database using the Plone *Add new...* menu.

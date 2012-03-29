@@ -35,8 +35,8 @@ Field mode
         - Computed on creation
     :Purpose:
         When editable, a field value can be entered by the user.
-        Otherwise, its value is computed using a formula. See Advanced
-        features -- Computed field.
+        Otherwise, its value is computed using a formula. See 
+        :ref:`computed-fields`.
 Formula
     :Value:
         Python code
@@ -50,8 +50,8 @@ Field read template and field edit template
     :Value:
         .PT template id
     :Purpose:
-        The custom .pt template to use to render the field. See Advanced
-        features -- Field template.
+        The custom .pt template to use to render the field. See 
+        :ref:`field-templates`.
 Validation formula
     :Value:
         Python code
@@ -106,16 +106,16 @@ Selection list
     :Purpose:
         The possible values selectable in the field.
 
-        Note: if a value contains a pipe (`|`), Plomino uses the string
+        Note: if a value contains a pipe (``|``), Plomino uses the string
         *before* the pipe as the entry label, and the string *after* as the
         real value. 
 
-        Example: ```United states of America|USA```
+        Example: ``United states of America|USA``
 Selection list formula 
     :Value: Python script
     :Purpose: 
         The formula must return the list of values selectable in the
-        field (using the ```label|value``` format if necessary).
+        field (using the ``label|value`` format if necessary).
 
         Note: if a Selection list formula is provided, it overrides the
         Selection list to provide the field value list.
@@ -149,6 +149,8 @@ Separator
           Examples: ``;-,``
 
 
+.. _number-field:
+
 Number field
 ------------
 
@@ -174,7 +176,7 @@ Format
     :Value:
           Python date pattern
     :Purpose:
-          Example: `%d/%m/%Y`
+          Example: ``%d/%m/%Y``
 
           If empty, default to the Database default date format.
 Starting year
@@ -222,13 +224,15 @@ Documents list formula
     :Value: 
           Python script
     :Purpose: 
-          This formula must return a list of string values formatted as follows::
-
-            ``label|path_to_document``
+          This formula must return a list of string values formatted as
+          follows: ``label|path_to_document``
 
           Notes:
-          - it might a path to any kind of Plone object (even if the main purpose is to link to Plomino Documents),
-          - if a formula is provided, it overrides Source view and Label column.
+
+          - it might a path to any kind of Plone object (even if the *main*
+            purpose is to link to Plomino Documents),
+          - if a formula is provided, it overrides Source view and Label
+            column.
 Separator
     :Value: 
           String
@@ -243,7 +247,7 @@ Datagrid field
 ---------------
 
 A datagrid field allows to edit a table. Rows are edited using an associated 
-form (displayed in a pop-up) which fields are mapped to columns.
+form (displayed in a pop-up) in which fields are mapped to columns.
 
 .. image:: images/datagrid-settings.jpg
 
@@ -270,10 +274,10 @@ You can hide a column in a view by changing the "Dynamic Table Parameters"
 field to include something like::
 
     'aoData': [
-    	   { "bVisible":    false },
-    	   null,
-    	   null,
-    	   null
+           { "bVisible":    false },
+           null,
+           null,
+           null
     ]
 
 You would need one item in the array for each column in the table. 

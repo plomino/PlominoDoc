@@ -151,6 +151,8 @@ Result:
 Fields
 ======
 
+.. _computed-fields:
+
 Computed fields
 ---------------
 
@@ -171,13 +173,13 @@ Computed for display
     the field value is computed each time the document is opened, but it
     is not saved.
 
-Example: create a computed for display field with this formula::
+Example: create a *Computed for display* field with this formula::
 
     category = plominoDocument.getItem('bookCategory') 
     if category: 
         index = plominoDocument.getParentDatabase().getIndex() 
-        autres = index.dbsearch({'bookCategory': category}) 
-        result = "There are %s other books in the same category" % len(autres)-1
+        others = index.dbsearch({'bookCategory': category}) 
+        result = "There are %s other books in the same category" % len(others)-1
         return result
     return "" 
 
@@ -190,7 +192,7 @@ Validation
 ----------
 
 By default, Plomino validates fields according to their type (for instance,
-letters are not allowed in a *Number* field).
+letters are not allowed in a :ref:`number-field`).
 
 You can also add more validation criteria in the field's **Validation**
 tab:
@@ -284,6 +286,8 @@ documents. For example::
     see that it does in fact return documents (``d.getObject() for d in
     res``) so this must have changed since 1.3. 
 
+.. _field-templates:
+
 Field templates
 ---------------
 
@@ -373,10 +377,11 @@ Result:
 Filling fields from the REQUEST
 -------------------------------
 
-Editable fields which are not part of the layout take their value
-from the REQUEST.
+Editable fields which are not part of the layout take their value from the
+REQUEST.
 
 So, for example, if you want to pass a parameter to another form:
+
 - in the origin document, put the parameter(s) in the link to the target
   form, e.g. by adding ``?param1=value&param2=value`` to the URL. This will
   cause the parameter to be part of the ``GET`` request which retrieves the
