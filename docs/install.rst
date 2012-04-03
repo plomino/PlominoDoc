@@ -13,7 +13,9 @@ Deploy the Plomino egg
 -----------------------
 
 To deploy the Plomino product, you need to edit your ``buildout.cfg`` file
-and add the following in the ``eggs`` and ``zcml`` sections::
+and add the following in the ``eggs`` and ``zcml`` sections:
+
+.. code-block:: ini
 
     eggs =
          ...
@@ -24,7 +26,9 @@ and add the following in the ``eggs`` and ``zcml`` sections::
          ...
          plomino.tinymce
 
-Then you have to run ``buildout`` to realize your configuration::
+Then you have to run ``buildout`` to realize your configuration:
+
+.. code-block:: sh
 
     bin/buildout -N
 
@@ -32,10 +36,10 @@ This will download the latest Plomino version (and its dependencies) from
 the http://pypi.python.org/ repository and deploy it in your Zope instance.
 
 Now you can restart your Zope instance and in your Plone site, go to 
-*Site setup / Add-on products*.
+:guilabel:`Site setup` / :guilabel:`Add-on products`.
 
 Here you should see ``Plomino`` and ``plomino.tinymce`` in the list of
-installable products. Select them and click *Install*.
+installable products. Select them and click :guilabel:`Install`.
 
 Once done, Plomino is installed, so when you are in a folder, you can add a 
-new Plomino database using the Plone *Add new...* menu.
+new Plomino database using the Plone :guilabel:`Add new...` menu.

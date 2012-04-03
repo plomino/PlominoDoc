@@ -63,7 +63,7 @@ Add to index
     :Value:
         True/False
     :Purpose:
-        If `True`, the field is added to the database index, allowing to
+        If ``True``, the field is added to the database index, allowing to
         perform search on its values.
 
 
@@ -209,9 +209,9 @@ Widget
         - ``Multi-selection list``
         - ``Embedded view``
     :Purpose:
-          If *Embedded view* is selected, the view itself is displayed,
-          with a check box on each row to allow the user to select a
-          document.
+          If :guilabel:`Embedded view` is selected, the view itself is
+          displayed, with a check box on each row to allow the user to
+          select a document.
 Source view
     :Value:
           The targeted view
@@ -270,15 +270,10 @@ Javascript settings
 Example: hide a column in a view
 ````````````````````````````````
 
-You can hide a column in a view by changing the "Dynamic Table Parameters"
-field to include something like::
+You can hide a column in a view by changing the :guilabel:`Dynamic Table
+Parameters` field to include something like::
 
-    'aoData': [
-           { "bVisible":    false },
-           null,
-           null,
-           null
-    ]
+    'aoData': [{"bVisible": false}, null, null, null]
 
 You would need one item in the array for each column in the table. 
 
@@ -307,7 +302,7 @@ formula::
 
 See `Google chart reference <http://code.google.com/intl/fr/apis/chart/>`_.
 
-TO BE COMPLETED
+.. todo:: TO BE COMPLETED
 
 Google visualization field
 --------------------------
@@ -318,4 +313,4 @@ Allow to draw dynamic charts (or maps, etc.).
 
 .. image:: images/gviz-densitymap.jpg
 
-TO BE COMPLETED
+.. todo:: TO BE COMPLETED

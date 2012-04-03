@@ -2,8 +2,7 @@
 About this Document
 -------------------
 
-This document is aimed at Plomino application designers and managers. It
-applies to Plomino 1.9.
+This document is aimed at Plomino application designers and managers. 
 
 This document is published under the **Creative Commons by-sa-nc**
 licence.

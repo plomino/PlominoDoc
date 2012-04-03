@@ -14,7 +14,7 @@ Design_).
 Forms
 =====
 
-A *form* allows users to view and/or to edit information.
+A :dfn:`form` allows users to view and/or to edit information.
 
 A form usually contains some fields of various types (text, date, rich
 text, checkbox, attached files, etc.).
@@ -31,10 +31,10 @@ are used to provide specific features (see `Search forms`_, and
 Documents
 =========
 
-A *document* is a set of data. Data can be submitted by a user using a
-given form.
+A :dfn:`document` is a set of data. Data can be submitted by a user using a
+given :term:`form`.
 
-.. Note: a document can be created using one form and then viewed or edited
+.. Note:: a document can be created using one form and then viewed or edited
    using a different form. The presentation of the document is determined
    by the form, which renders the data items found on the document. The
    fields on the form need not correspond one to one with the data items
@@ -42,20 +42,20 @@ given form.
    the type of field may be different. Care should be taken to maintain
    consistency: make sure that the form matches the document. 
 
-This mechanism allows the document rendering and the displayed action
-buttons to change according to different parameters (user access rights,
-current document state, field values, etc.).
+    This mechanism allows the document rendering and the displayed action
+    buttons to change according to different parameters (user access rights,
+    current document state, field values, etc.).
 
 Views
 =====
 
-A *view* defines a collection of documents.
+A :dfn:`view` defines a collection of documents.
 
 A view has a *selection formula* which filters the documents that the
 application designer wants to be displayed in the view.
 
-A view contains *columns*. Column contents is computed from data stored in
-the documents.
+A view contains *columns*. :term:`Column` contents is computed from data
+stored in the documents.
 
 Search forms
 ============

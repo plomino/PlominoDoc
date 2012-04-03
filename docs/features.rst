@@ -11,6 +11,13 @@ Formulas are Python scripts. Example::
 
 return the value of the ``price`` item multiplied by 15.
 
+If the ``price`` item doesn't exist, ``getItem`` will return ``None``, and
+the formula will raise an exception. The exception is swallowed and the
+formula returns ``None`` as well. If the Plomino database is running in
+debug mode, the exception will be logged. If the ``price`` item contains
+a string or a truth value instead of a number, you'll also get an exception. 
+Plomino needs to be coded defensively!
+
 .. Note::
     a formula does not necessarily need to return a value -- you may
     just need to make some changes in some documents (for instance if it
@@ -23,8 +30,8 @@ current document on which the formula is evaluated.
 ``plominoContext`` is a reserved name which corresponds to the
 context in which the formula is evaluated. In many cases this will be 
 the same as ``plominoDocument``, but in some cases the formula is executed
-on an object which is not a Plomino document (but a view, or a form, for
-instance). 
+on an object which is not a Plomino document (but a :term:`view`, or a
+:term:`form`, for instance). 
 
 Document items should be accessed using the ``getItem()`` method:
 ``plominoDocument.getItem('validationDate')``. 
@@ -89,7 +96,7 @@ user access rights.
 To improve the application usability, you may need to add more actions
 in the forms or in the views.
 
-To create an action, select ``Plomino: action`` in the **Add item**
+To create an action, select ``Plomino: action`` in the :guilabel:`Add item`
 Plone menu.
 
 .. image:: images/6cee3f7f.png
@@ -98,35 +105,36 @@ Enter an identifier and a title.
 
 Then select the action type:
 
-- Open form: open the form indicated by the ``Parameter or code``
-  parameter to create a new document.
+- :guilabel:`Open form`: open the form indicated by the ``Parameter or
+  code`` parameter to create a new document.
 
-- Open view: open the view indicated by the ``Parameter or code``
-  parameter.
+- :guilabel:`Open view`: open the view indicated by the ``Parameter or
+  code`` parameter.
 
-- Close: go back to the database home page.
+- :guilabel:`Close`: go back to the database home page.
 
-- Save: submit the form with its current content, and save (or create)
-  the document.
+- :guilabel:`Save`: submit the form with its current content, and save (or
+  create) the document.
 
-- Python script: run the formula entered in ``Parameter or code``, and
-  redirect to the current object (in read mode). Examples: send a mail
-  notification to someone, compute a field value and update the document
-  with this new value, etc. If the formula returns a string, Plomino will 
-  will assume it is a URL and use it for redirection.
+- :guilabel:`Python script`: run the formula entered in ``Parameter or
+  code``, and redirect to the current object (in read mode). Examples: send
+  a mail notification to someone, compute a field value and update the
+  document with this new value, etc. If the formula returns a string,
+  Plomino will will assume it is a URL and use it for redirection.
 
-- Redirect: same as ``Python script``, but the formula should return an
-  URL that will be used for redirection. Example: create a new document
-  using some values from the current document, and automatically open
-  this new document.
+- :guilabel:`Redirect`: same as ``Python script``, but the formula should
+  return an URL that will be used for redirection. Example: create a new
+  document using some values from the current document, and automatically
+  open this new document.
 
-You can add a *hide-when* formula to control when the action should be
+You can add a :term:`hide-when` formula to control when the action should be
 visible or not.
 
-If you select ``Display action in action bar``, the action will be
+If you select :guilabel:`Display action in action bar`, the action will be
 displayed together with the standard Plomino actions in the action bar.
 
-** New in Plomino 1.5 **
+New in Plomino 1.5
+------------------
 
 Actions can be inserted directly in the form layout using TinyMCE.
 
@@ -135,9 +143,9 @@ Example:
 .. image:: images/m2899c882.png
 
 But (in forms only) you can also choose to insert the action within the
-form layout directly. You must use the *Plomino action* style in Kupu,
-and the action will be rendered according the Action display parameter
-(link, submit button, or button).
+form layout directly. You must use the :guilabel:`Plomino action` style in
+Kupu, and the action will be rendered according the :guilabel:`Action`
+display parameter (link, submit button, or button).
 
 Example:
 
@@ -194,8 +202,8 @@ Validation
 By default, Plomino validates fields according to their type (for instance,
 letters are not allowed in a :ref:`number-field`).
 
-You can also add more validation criteria in the field's **Validation**
-tab:
+You can also add more validation criteria in the field's
+:guilabel:`Validation` tab:
 
 - a field can be **mandatory**: if the field is empty when the document is
   saved, Plomino does not save the document and displays an alert to the
@@ -209,9 +217,9 @@ amount is 1000 euros. You would enter the following formula in the
 ``TotalAmount`` field::
 
     if plominoDocument.TotalAmount>1000: 
-        return 'The total amount must be under 1000 euros` 
+        return 'The total amount must be under 1000 euros' 
     else: 
-        return '`
+        return ''
 
 If you need to compare the submitted values to the currently stored state of
 the document, you need to look up the stored document first::
@@ -230,7 +238,7 @@ A Doclink field allows a Plomino document to reference another document.
 The doclink stores the path to the targeted document, and it is
 displayed as a link.
 
-You may use a *view* as the source of possible targeted documents.
+You may use a :term:`view` as the source of possible targeted documents.
 
 Example
 ```````
@@ -267,21 +275,21 @@ filter the documents you want to list, you can retrieve documents from
 another database, or even list Plone objects which are not Plomino
 documents. For example::
 
-    contactsdb=plominoDocument.restrictedTraverse("/Plone/demo/contacts") 
-    view=contactsdb.getView('allcontacts') 
+    contactsdb = plominoDocument.restrictedTraverse("/Plone/demo/contacts") 
+    view = contactsdb.getView('allcontacts') 
     return [d.lastname+"|"+d.getPath() for d in view.getAllDocuments()] 
 
 .. Note::
-    in this example, we use the `getAllDocuments` method to get the
-    documents list, this method returns Catalog brains
+    in this example, we use the ``getAllDocuments`` method to get the
+    documents list, this method returns Catalog brains.
 
     To improve performance, the ``lastname`` field has been added to the
     index, so there is no need to wake up the objects (using
-    `getObject`), and we use the `getPath` method to get the path of the
+    ``getObject``), and we use the ``getPath`` method to get the path of the
     real object.
     
-.. Todo: 
-    Hmm, getAllDocuments doesn't sound like it will return brains, it
+.. Todo:: 
+    Hmm, ``getAllDocuments`` doesn't sound like it will return brains, it
     sounds like it will return documents. Looking at the source code, I
     see that it does in fact return documents (``d.getObject() for d in
     res``) so this must have changed since 1.3. 
@@ -295,10 +303,11 @@ You can create a custom template to render a field in a different way
 than the regular field widgets.
 
 The field template must be added in the Resources folder in the ZMI (go
-to **Design tab/Others/Resources folder**) as a Page Template.
+to :guilabel:`Design` tab / :guilabel:`Others` / :guilabel:`Resources
+folder`) as a Page Template.
 
-To be applied, the template id must be then entered in the *Field read
-template* or in the *Field edit template*.
+To be applied, the template id must be then entered in the :guilabel:`Field
+read template` or in the :guilabel:`Field edit template`.
 
 The template code can be copied from the Plomino products sources
 (`CMFPlomino/skins/cmfplomino_templates/**FieldEdit.pt` or
@@ -306,7 +315,9 @@ The template code can be copied from the Plomino products sources
 
 Here is an example showing a multi-categorized tag field:
 
-Edit template::
+Edit template:
+
+.. code-block:: html
 
     <span tal:define="
         field options/field;
@@ -349,7 +360,9 @@ Result:
 
 .. image:: images/46da1d8b.png
 
-Read template::
+Read template:
+
+.. code-block:: html
 
     <tal:block tal:repeat="v options/selection">
         <tal:block define="
@@ -378,7 +391,7 @@ Filling fields from the REQUEST
 -------------------------------
 
 Editable fields which are not part of the layout take their value from the
-REQUEST.
+``REQUEST``.
 
 So, for example, if you want to pass a parameter to another form:
 
@@ -412,21 +425,19 @@ it very big, or if there are many accordions on a page and the reader is
 interested in only a few of them.
  
 To turn part of a page into an accordion, use this structure (the header level
-can be from ``h2`` to ``h6``)::
+can be from ``h2`` to ``h6``):
 
-    <h5 class="???"><a href="#">Header</a></h5>
+.. code-block:: html
+
+    <h5 class="plomino-accordion-header"><a href="TARGETURL">Header</a></h5>
     <div>Content</div>
 
-.. todo:: Make that an HTML block 
+If the class is ``plomino-accordion-header``, the content of the page
+referenced by ``TARGETURL`` will be substituted for the subsequent div. 
 
-.. todo:: What's possibilities for class?
-
-If the class is ``plomino-accordion-header`` and the ``href`` is not ``#``, the 
-content of the referenced page will be substituted for the following div. 
-
-.. Note:: Plomino does not currently offer UI support for this functionality. 
-   To use it, you have to generated the desired content via Python, or enter
-   it literally into the form layout. 
+.. Note:: Plomino does not currently offer UI support for this
+    functionality.  To use it, you have to generate the desired content via
+    Python, or enter it literally into the form layout. 
 
 Events
 ------
@@ -455,7 +466,7 @@ In a Plomino form, you can use the following events:
 ``beforeCreateDocument``
     executed before a blank form is opened.
     
-In the **Events** tab, you can enter the formulas for each event you
+In the :guilabel:`Events` tab, you can enter the formulas for each event you
 need.
 
 Example: enter the following formula for the ``onSaveDocument`` event::
@@ -480,7 +491,8 @@ access rights, etc.).
 
 To do so, you must use Hide-when formulas.
 
-Select ``Plomino: hide when`` in the **Add item** Plone menu.
+Select :guilabel:`Plomino: hide when` in the :guilabel:`Add item` Plone
+menu.
 
 Enter an identifier, a title, and a formula. Example:
 ``plominoDocument.bookState=='Damaged```
@@ -489,16 +501,17 @@ Then, modify the form layout to insert the hide-when formula in the form
 layout. Enter the following: ``start:hide-when-identifier``
 at the beginning of the area to hide. And the following at the end:
 ``end:hide-when-identifier``
-And apply the Plomino *Hide-when* formula style to those 2 bounds:
+And apply the Plomino :guilabel:`Hide-when` formula style to those 2 bounds:
 
 .. image:: images/m33cfb2d3.png
 
-If the hide-when formula returns `True`, the enclosed area will be
-hidden. If it returns `False`, the area is displayed (in our example: if
-the book is damaged, it cannot be borrowed, so we hide the action to
-check the book availability).
+If the :term:`hide-when` formula returns ``True``, the enclosed area will be
+hidden. If it returns ``False``, the area is displayed (in our example: if
+the book is damaged, it cannot be borrowed, so we hide the action to check
+the book availability).
 
-** New in Plomino 1.5 **
+New in Plomino 1.5
+```````````````````
 
 Hide-when formulas can be inserted directly in the form layout using TinyMCE.
 
@@ -520,16 +533,17 @@ In our example, we create a ``borrowInfo`` form containing the
 borrower name, the return date, and the availability, and we insert it
 as a sub-form in ``frmBook``, ``frmCD`` and ``frmVideo``.
 
-The form is inserted using the Plomino *Subform* style in Kupu:
+The form is inserted using the Plomino :guilabel:`Subform` style in Kupu:
 
 .. image:: images/m12bfc6b1.png
 
 .. Note:: 
-    as you probably do not want 'borrowInfo' to be displayed in the
-    database home page, you have to check ``Hide in menu`` in the form
-    **Parameters** tab.
+    as you probably do not want ``borrowInfo`` to be displayed in the
+    database home page, you have to check :guilabel:`Hide in menu` in the
+    form :guilabel:`Parameters` tab.
 
-** New in Plomino 1.5 **
+New in Plomino 1.5
+```````````````````
 
 Sub-forms can be inserted directly in the form layout using TinyMCE.
 
@@ -541,7 +555,7 @@ default ZCatalog search among the documents of the view associated with
 the search page.
 
 If needed, you can create a specific search formula in the form
-**Parameters** tab.
+:guilabel:`Parameters` tab.
 
 This formula is used to filter the result set of the default query, and 
 must return ``True`` or ``False`` for each document in the result set.
@@ -566,8 +580,8 @@ Search event
 
 If you do not want the default filters of a search page (the view, the 
 query, and the formula), you can define an ``onSearch`` event on the form
-**Events** tab. The formula of this event should return the required list 
-of documents. 
+:guilabel:`Events` tab. The formula of this event should return the required
+list of documents. 
 
 You can access the values submitted by the search form on the ``REQUEST``
 object: ``plominoContext.REQUEST.get('myfield')``.
@@ -577,7 +591,7 @@ Page
 
 Like a *Search* form, a *Page* form cannot be used to save documents through
 the web, since *Page* forms do not display any action bar. (Formulas could
-however still call ``save`` on document using a Page form.)
+however still call ``save`` on a document using a Page form.)
 
 Like any form, it can contain computed fields, actions (inserted in the form
 layout), and hide-when formulas, so it is a good way to build navigation
@@ -588,8 +602,8 @@ Example:
 .. image:: images/m8490705.png
 
 Here we create a page with 3 actions to access 3 different views, but
-the last one is enclosed in a Hide-when formula so it will not be
-displayed if the current user does not satisfy a given criteria. In the
+the last one is enclosed in a :term:`Hide-when` formula so it will not be
+displayed if the current user does not satisfy a given criterium. In the
 example, we test if the user has the ``[dbadmin]`` role::
 
     "[dbadmin]" not in plominoContext.getCurrentUserRoles()
@@ -602,7 +616,7 @@ Result if you are ``[dbadmin]``:
 
 .. image:: images/5203c813.png
 
-Open with form
+Open-with form
 --------------
 
 The form used to render a document is determined by a number of mechanisms:
@@ -634,8 +648,8 @@ information (book description, category, publication year, etc.) than
 the librarian (who may want last borrower, return date, availability,
 etc.).
 
-As explained previously, we can manage this issue using hide-when
-formulas, actions and sub-forms.
+As explained previously, we can manage this issue using :term:`hide-when`
+formulas, :term:`action`'s and :term:`sub-form`'s.
 
 But if the functional differences are too great, or if the layout is
 totally different, those strategies will probably produce too much
@@ -644,11 +658,12 @@ complexity.
 In such a case, it is better to create a totally different form (named
 ``frmBorrowManagement`` for instance).
 
-Unfortunately, the document always opens with the form used the last
-time it has been saved.
+However, by default the document opens with the form used the last
+time it was saved.
 
 To open the document with a different form, you need to create a
-specific view for borrow management and use the Form formula parameter.
+specific view for borrowing management and use the ``Form`` formula
+parameter.
 
 This formula will compute the name of the form to use when the documents
 are opened from the view.
@@ -663,14 +678,14 @@ View template
 If you need a specific layout for a view, you can create a ZPT page
 which can be used instead the default template.
 
-This way, you can build calendar view, Gantt view, produce charts, etc.
+This way, you can build calendar views, Gantt views, produce charts, etc.
 
 To do so, add your Page Template in the resources folder, and enter its
-name in View Template in the view Parameters tab.
+name in :guilabel:`View Template` in the view :guilabel:`Parameters` tab.
 
 A good approach is to copy the ZPT code from
 ``CMFPlomino/skins/CMFPlomino/OpenView.pt`` (in the Plomino sources) and
-append your modifications.
+add your modifications.
 
 .. Note:: good knowledge of ZPT is required.
 
@@ -680,13 +695,13 @@ Export CSV
 All the views can be exported as CSV. The export contains the value of
 each column.
 
-Go to the database **Design** tab, expand the **Views** section and
-click the green arrow icon next to the view you want to export.
+Go to the database :guilabel:`Design` tab, expand the :guilabel:`Views`
+section and click the green arrow icon next to the view you want to export.
 
 You can build views specifically for export purposes, you just need to
 create the columns according the values you want to get in CSV (note: if
 you do not want this view to be offered on the database home page, check
-``Hide in menu`` in the view **Parameters** tab).
+:guilabel:`Hide in menu` in the view :guilabel:`Parameters` tab).
 
 Database
 ========
@@ -702,8 +717,8 @@ index entirely, and destroy all the previously compiled Plomino formula
 scripts (the first time a formula is called, it is compiled in a Python
 Script object in the ZODB).
 
-To do so, go to the database **Design** tab, expand the **Others**
-section and click on **Database refresh**.
+To do so, go to the database :guilabel:`Design` tab, expand the
+:guilabel:`Others` section and click on :guilabel:`Database refresh`.
 
 Refresh also migrates your database to your current Plomino version (if
 Plomino has been upgraded since the database was created).
@@ -718,8 +733,9 @@ This may be useful if you want to deploy a new application from a
 development server to a production server, or if you want to release a
 modification or a correction on an application already in production.
 
-To import design elements, go to the database **Design** tab, and in the
-**Import/Export Design** section, fill in the following parameters:
+To import design elements, go to the database :guilabel:`Design` tab, and in
+the :guilabel:`Import/Export Design` section, fill in the following
+parameters:
 
 - the URL of the Plomino database which contains the elements you want
   to import in the current database;
@@ -733,13 +749,14 @@ elements in the remote database.
 
 .. image:: images/790674a2.png
 
-You can then choose the elements you want and click on **Import** to
+You can then choose the elements you want and click on :guilabel:`Import` to
 import them into the local database.
 
 In some cases (depending on firewalls, proxies, etc.), it is easier to
 export from the local database to the remote one.
 
-The principle is the same, you just need to use the **Export** section.
+The principle is the same, you just need to use the :guilabel:`Export`
+section.
 
 
 Replication
@@ -751,9 +768,15 @@ different Zope servers.
 .. image:: images/45edb683.png
 
 There are 3 replication modes:
-- push mode: local modifications are replicated on the remote database;
-- pull mode: remote modifications are replicated on the local database;
-- push-pull mode: both.
+
+push mode
+    local modifications are replicated on the remote database;
+
+pull mode
+    remote modifications are replicated on the local database;
+
+push-pull mode
+    both.
 
 If a document has been modified in both the local and remote databases
 since the last replication, there are 3 conflict resolution modes:
@@ -767,8 +790,8 @@ or for mobile workers who want to be able to work on a local replica.
 Documents XML import/export
 ---------------------------
 
-In the Replication tab (at the bottom), you can import/export documents
-from/to an XML file.
+In the :guilabel:`Replication` tab (at the bottom), you can import/export
+documents from/to an XML file.
 
 .. image:: images/import-export-docs.jpg
 
@@ -778,24 +801,28 @@ selected in this view will be exported).
 Document ids are preserved so if a document already exists in the target
 database, it is updated and not duplicated.
 
-Note: when importing from XML, onSaveDocument event is not called (as document
-items are all part of the export).
+.. Note:: when importing from XML, the ``onSaveDocument`` event is not
+    called (as document items are all part of the export).
 
 Documents CSV import
 --------------------
 
-In the Replication tab, you can import documents from a CSV file.
+In the :guilabel:`Replication` tab, you can import documents from a CSV
+file.
 
 .. image:: images/import-csv.jpg
 
 You need to indicate which form has to be used to create the documents.
 
-The first row in the CSV file must contain the field id for the considered
+The first row in the CSV file must contain the field id for the intended 
 column.
 
-Note: when importing from CSV, onSaveDocument event is called (as some
-items might needed to be computed) but index is not refreshed to avoid
-bad performances.
+.. Note:: when importing from CSV, the ``onSaveDocument`` event is called
+    (as some items might needed to be computed) but the index is not
+    refreshed to avoid degrading performance. This means that the index
+    needs to be updated manually, possibly by running an agent that re-saves
+    imported documents on a schedule, or by refreshing the database on a
+    worker ZEO client instance.
 
 Start page
 ----------
@@ -807,8 +834,8 @@ By default, the database default screen is the generic database menu:
 But you might prefer to display something else instead (for instance a
 view, a page, a search form, etc.).
 
-In this case, go to your database **Edit** tab, and enter the element id
-in the **Start page** parameter.
+In this case, go to your database :guilabel:`Edit` tab, and enter the
+element id in the :guilabel:`Start page` parameter.
 
 Agents
 ======
@@ -817,8 +844,8 @@ It might be useful to launch the same processing from different places
 in the application (views action, forms action). To avoid duplicating
 the code, you can implement the code in an *agent*.
 
-Select ``Plomino: agent`` in the **Add item** Plone menu, and enter an
-identifier, a title and the code.
+Select :guilabel:`Plomino: agent` in the :guilabel:`Add item` Plone menu,
+and enter an identifier, a title and the code.
 
 This might be useful to run archiving, cleaning, etc. without giving
 manager rights to regular users.
@@ -828,17 +855,18 @@ The agent can be executed (from an action) using the ``runAgent()`` method::
     db = plominoDocument.getParentDatabase() 
     db.MyAgent.runAgent()
 
-Note: this method can take ``REQUEST`` as parameter (this has to be the
-REQUEST object), which allows variables in the querystring to be read and
-redirection to be controlled (using a ``REDIRECT`` key on the request).
+.. Note:: this method can take ``REQUEST`` as parameter (this has to be the
+    REQUEST object), which allows variables in the querystring to be read
+    and redirection to be controlled (using a ``REDIRECT`` key on the
+    request).
 
 The agent can also be executed from Python formulas by calling it directly::
 
     db = plominoDocument.getParentDatabase() 
     db.MyAgent('one', 'two', 'three')
 
-Note: this method can take optional positional arguments. It does not
-redirect.
+.. Note:: this method can take optional positional arguments. It does not
+    redirect.
 
 If you install `ZpCron <http://old.zope.org/Members/janik/ZpCron>`_
 on your Zope instance, an agent can also be scheduled. You specify when the
@@ -854,45 +882,41 @@ Resources
 A Plomino database contains a ``resources`` folder in the ZODB which can
 contain useful extra assets:
 
-- images or icons you may need to insert in your forms;
-
-- CSS or javascript files;
-
-- ZPT templates (see view template below);
-
+- images or icons you may need to insert in your forms; 
+- CSS or javascript files; 
+- ZPT templates (see view template below); 
 - Python files, to provide a code library usable from the different
-  formulas (using the `callScriptMethod` method);
-
-- CSV (or other) files containing useful data;
-
+  formulas (using the `callScriptMethod` method); 
+- CSV (or other) files containing useful data; 
 - etc.
 
-To access this folder, go to the **Design** tab, expand the **Others**
-section and click on **Resources Folder**. It opens the standard ZMI
-screen, which allows new elements to be added.
+To access this folder, go to the :guilabel:`Design` tab, expand the
+:guilabel:`Others` section and click on :guilabel:`Resources Folder`. It
+opens the standard :term:`ZMI` screen, which allows new elements to be
+added.
 
 Plomino Element Portlet
 =======================
 
-A portlet displaying a Plomino form can be added anywhere in a Plone site. It
-can be useful to show informations, like statistics or charts (thanks to Google
-Visualization, for example), computed when the page is displayed.
+A portlet displaying a Plomino form can be added anywhere in a Plone site.
+It can be useful to show informations, like statistics or charts (thanks to
+Google Visualization, for example), computed when the page is displayed.
 
 .. Note::
 
-	In Plone, when you add a portlet to a page, all of its children pages
-	will contain it too. For example, if you add a portlet to the main page of
-	the site, it will be displayed in every pages of the site. You can prevent
-	this mechanism in a child page: click on **Manage Portlets** in this page,
-	find the selector next to the name of the portlet (e.g. *Plomino element
-	portlet*), and select ``Block``.
+    In Plone, when you add a portlet to a page, all of its children pages
+    will contain it too. For example, if you add a portlet to the main page
+    of the site, it will be displayed in every pages of the site. You can
+    prevent this mechanism in a child page: click on :guilabel:`Manage
+    Portlets` in this page, find the selector next to the name of the
+    portlet (e.g. :guilabel:`Plomino element portlet`), and select
+    guilabel:`Block`.
 
+You can add a portlet on a page with few steps:
 
-You can add a portlet on a page within fiew steps:
-
-- Click on the link **Manage portlets**
-- In the **Add portlet...** selector, choose the **Plomino element portlet**
-  option
+- Click on the link :guilabel:`Manage portlets`
+- In the :guilabel:`Add portlet...` selector, choose the :guilabel:`Plomino
+  element portlet` option.
 
 A new page appears, with some fields:
 
@@ -900,17 +924,17 @@ A new page appears, with some fields:
 
 - The header field sets the title of the portlet.
 
-- Database path is the path of a Plomino database in the site, storing the
-  form to be displayed. If the base is accessible at the URL
-  ``http://example.org/Plone/database``, the path is ``/Plone/database``. Since
-  there is always an exception to a rule, you have to be careful when the site
-  URLs are re-written (e.g. if the Plone site is behind an Apache server). The
-  path must be the *Plone site* path, not the public URL.
+- The database path is the path of a Plomino database in the site, storing
+  the form to be displayed. If the base is accessible at the URL
+  ``http://example.org/Plone/database``, the path is ``/Plone/database``.
+  Since there is always an exception to a rule, you have to be careful when
+  the site URLs are re-written (e.g. if the Plone site is behind an Apache
+  server). The path must be the *Plone site* path, not the public URL.
 
 - Element ID is the form identifier (set at its creation) in the database
   specified previously.
 
-The portlet new is now displayed in the page side.
+The new portlet is now displayed alongside the page.
 
 .. image:: images/element-portlet-display.png
 
@@ -920,8 +944,8 @@ Extending Plomino with plugins
 Plomino provides a set of utility functions in ``PlominoUtils``
 (``DateToString``, ``asUnicode``, etc.).
 
-In addition, custom Plomino utilities can be declared to Plomino from a
-custom package, and they will be available from any Plomino formula.
+In addition, custom Plomino utilities can be declared in a custom package,
+and they will be available from any Plomino formula.
 
 Example::
 
@@ -945,12 +969,14 @@ Create a class to declare them::
         module = "mypackage.mymodule"
         methods = ['jsonify', 'dejsonify']
 
-Declare the module as safe so it can be called from Python Scripts
-(all Plomino formula are Python Scripts)::
+Declare the module as safe so it can be called from Python Scripts (all
+Plomino :term:`formula` are Python Scripts)::
 
     allow_module("mypackage.mymodule")
 
-And register it with Plomino in a ``configure.zcml`` file::
+And register it with Plomino in a ``configure.zcml`` file:
+
+.. code-block:: xml
 
   <utility
         name="MyUtils"

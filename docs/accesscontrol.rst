@@ -53,15 +53,16 @@ application.
 
 For instance, if you build a Plomino application to handle purchase
 requests, all the employees will be able to use the form to submit a
-purchase request, but only the users with the `[FinancialReponsible]`
-role would be able to modify the **Approval** section in this form.
+purchase request, but only the users with the ``[FinancialReponsible]``
+role would be able to modify the *Approval* section in this form.
 
 .. Note:: roles are always noted with brackets.
 
 Manage the access rights
 ========================
 
-Access rights are managed in the tab named **ACL** (Access Control List). 
+Access rights are managed in the tab named :guilabel:`ACL` (Access Control
+List). 
 
 .. image:: images/30eab40c.png 
 
@@ -69,30 +70,30 @@ Application-level access control
 ================================
 
 In addition to the global access rights, it may also be necessary to
-configure access to documents individually. As an example, here is one way to restrict
-document access to the creator of the document:
+configure access to documents individually. As an example, here is one way
+to restrict document access to the creator of the document:
 
-- create a ``Name`` field named ``creator`` for instance,
-  `Computed on creation`, with the following formula::
+- create a field named ``creator`` (for instance). It should be of type
+  ``Name`` and mode ``Computed on creation``, with the following formula::
 
     plominoDocument.getCurrentUser().getMemberId()
-  
-  This will store the user id of the user who creates the
-  document (it might be dangerous to use the `Plomino_Authors`
-  item on the document, as its value may evolve during the
-  document life cycle).
+
+  This will store the user id of the user who creates the document (it might
+  be dangerous to use the ``Plomino_Authors`` item on the document, as its
+  value may evolve during the document life cycle).
   
   Add this field to the index.
 
-- add a formula for the `onOpenDocument` event to make sure the
+- add a formula for the ``onOpenDocument`` event to make sure the
   user is the creator (if this formula returns a false value,
   opening is allowed, but if it returns a true value, e.g. a
   string, opening fails, and the value is displayed as an error
   message).
-  
+
   Here's an example formula::
 
-    if plominoDocument.getCurrentUser().getMemberId()==plominoDocument.getItem('creator'):
+    member_id = plominoDocument.getCurrentUser().getMemberId()
+    if member_id == plominoDocument.getItem('creator'):
         return None
 
     roles=plominoDocument.getCurrentUserRoles()
@@ -101,14 +102,12 @@ document access to the creator of the document:
 
     return "You are not allowed to view this document."
 
-.. Note: in this formula, we're checking for the
-    ``[controller]`` custom role, instead of the 
-    ``PlominoManager`` role. While this does imply that you have to
-    give this role to everyone who has the ``PlominoManager``
-    role, it allows you to distinguish between functional
-    managers (who will only have the ``[controller]`` role, and
-    technical managers (who will also have the
-    ``PlominoManager`` role). 
+.. Note: in this formula, we're checking for the ``[controller]`` custom
+   role, instead of the ``PlominoManager`` role. While this does imply that
+   you have to give this role to everyone who has the ``PlominoManager``
+   role, it allows you to distinguish between functional managers (who will
+   only have the ``[controller]`` role, and technical managers (who will
+   also have the ``PlominoManager`` role). 
 
 - create a search form which filters documents where the creator
   field matches the current user id.

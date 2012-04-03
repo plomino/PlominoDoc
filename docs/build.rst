@@ -6,7 +6,7 @@ Create a Plomino database
 =========================
 
 To create a Plomino database, select ``Plomino: database`` in the 
-**Add item** Plone menu.
+:guilabel:`Add item` Plone menu.
 
 .. image:: images/m440f207a.png
 
@@ -16,10 +16,11 @@ Add a form
 ==========
 
 Forms can be added using the Plomino Design portlet, which is usually
-displayed in the left-hand column, or using the Plone *Add* dropdown menu.
+displayed in the left-hand column, or using the Plone :guilabel:`Add`
+dropdown menu.
 
-To add a form, click **Add new... Form** in the portlet, or select
-``Plomino: form`` from the **Add item** Plone menu.
+To add a form, click :guilabel:`Add new... Form` in the portlet, or select
+``Plomino: form`` from the :guilabel:`Add item` Plone menu.
 
 .. image:: images/m4539359f.png
 
@@ -29,8 +30,8 @@ preferable to replace it with a more meaningful id (for instance:
 ``frmBook``). It is a technical identifier, so use basic characters and
 numbers only (blank space and special characters are forbidden).
 
-In the *Title* field, enter the form label, which will be displayed to the
-users (for instance: ``Book description``.
+In the :guilabel:`Title` field, enter the form label, which will be
+displayed to the users (for instance: ``Book description``.
 
 .. image:: images/m34f61fc7.png
 
@@ -40,11 +41,11 @@ fields to your form).
 Create the layout and add fields
 ================================
 
-Click on the **Edit** tab.
+Click on the :guilabel:`Edit` tab.
 
-Go to the *Form layout* section which contains the TinyMCE editor. If
-necessary, expand the editing area by dragging the bottom-right corner, or 
-clicking on the full-screen icon from the editor toolbar.
+Go to the :guilabel:`Form layout` section which contains the TinyMCE editor.
+If necessary, expand the editing area by dragging the bottom-right corner,
+or clicking on the full-screen icon from the editor toolbar.
 
 Create your form layout using the standard editing tools (styles, tables,
 etc.).
@@ -52,7 +53,7 @@ etc.).
 .. image:: images/build-1.png
 
 To add a field to the layout, select some word in the layout and click on
-the *Add/edit Plomino field* button in the TinyMCE toolbar. 
+the :guilabel:`Add/edit Plomino field` button in the TinyMCE toolbar. 
 
 .. image:: images/build-2.png
 
@@ -62,7 +63,7 @@ allow you to enter the field main parameters:
 .. image:: images/build-3.png
 
 For the  ``bookAuthor`` field, keep the default values ('Text' and
-'Editable'), click *Insert* and then *Close*.
+'Editable'), click :guilabel:`Insert` and then :guilabel:`Close`.
 
 As you can see, the field is rendered with a blue dashed border in the
 layout.
@@ -74,20 +75,21 @@ Do the same for the following fields:
 - ``summary``, type 'Rich text', 'Editable' 
 - ``cover``, type 'File attachment', 'Editable'
 - ``bookCategory``, choose type 'Selection list', 'Editable', but after
-  clicking *Insert*, click on *Specific settings*.
+  clicking :guilabel:`Insert`, click on :guilabel:`Specific settings`.
 
 This opens the field settings page in a new window, where you can enter the
 possible values for the Selection list: 
 
 .. image:: images/build-4.png
 
-Click *Apply*, go back to the Form window, and close the field pop-up.
+Click :guilabel:`Apply`, go back to the Form window, and close the field
+pop-up.
 
 Now the form is built, and its associated fields have been created.
 
 .. image:: images/build-5.png
 
-Save the form (click the *Save* button at the bottom of the page).
+Save the form (click the :guilabel:`Save` button at the bottom of the page).
 
 Use the form
 ============
@@ -114,7 +116,7 @@ You can enter values and save, and a new document will be created:
 Explore the database design
 ===========================
 
-Go to the *Books* database and click the *Design* tab.
+Go to the *Books* database and click the :guilabel:`Design` tab.
 
 This tab displays all the design elements contained in the database: 
 
@@ -133,7 +135,7 @@ In the present case, the title is "Book description", and it will be the
 title of all the documents you would create with your form.
 
 To display a more useful title, go to the ``frmBook`` object, edit it, and
-enter the following formula in the *Document title formula* field::
+enter the following formula in the :guilabel:`Document title formula` field::
 
     return "Information about %s (%s)" % (
         plominoDocument.getItem('bookTitle'), 
@@ -166,9 +168,9 @@ identifier (``4e219e4ffff21b9753c94a0e006e95bf`` in the following)::
 
     http://localhost:8090/demo/books/plomino_documents/4e219e4ffff21b9753c94a0e006e95bf
 
-If you want to use meaningful ids, you can define a *Document id formula*.
-Go to the ``frmBook`` object, edit it, and enter the following formula in
-'Document id formula'::
+If you want to use meaningful ids, you can define a :guilabel:`Document id
+formula`.  Go to the ``frmBook`` object, edit it, and enter the following
+formula in :guilabel:`Document id formula`::
 
     plominoDocument.bookTitle +"-"+plominoDocument.bookAuthor
 
@@ -179,7 +181,7 @@ corresponding to your formula::
 
     http://localhost:8090/demo/books/plomino_documents/1919-john-dospassos
 
-.. Note: If you use this facility, you need to take care that document
+.. Warning:: If you use this facility, you need to take care that document
    ids are unique, well-formed, and resolve any issues that arise when 
    replicating documents to other Plomino instances. Calculating your 
    own document ids can be a considerable responsibility, depending on the
@@ -189,9 +191,9 @@ corresponding to your formula::
 Add a view
 ==========
 
-A view defines a collection of documents. Some views are used to present
-list of documents to users, and some are used from formulas to structure the
-Plomino application. 
+A :term:`view` defines a collection of documents. Some views are used to
+present list of documents to users, and some are used from formulas to
+structure the Plomino application. 
 
 A view has a selection formula, which defines which documents form part of
 the view, and it usually contains some columns to display information about
@@ -202,20 +204,21 @@ Plone objects, or other sources.
 You can generate a view automatically from a form:
 
 - Go to the ``frmBook`` form, and 
-- click on *Generate view* in the Design portlet on the left.
+- click on :guilabel:`Generate view` in the :guilabel:`Design` portlet on
+  the left.
 
 This generates a view which:
 
 - selects all the documents that were created or last edited using the
   ``frmBook`` form,
-- creates a column for each field on the form (file attachments and rich
-  text fields are skipped), and it also 
-- inserts an *Add new* action.
+- creates a :guilabel:`column` for each field on the form (file attachments
+  and rich text fields are skipped), and it also 
+- inserts an :guilabel:`Add new` action.
 
 .. image:: images/build-12.png
 
-The columns can be re-ordered by drag-and-drop in the *Contents* tab. The
-column labels can also be changed.
+The columns can be re-ordered by drag-and-drop in the :guilabel:`Contents`
+tab. The column labels can also be changed.
 
 
 Add a view manually
@@ -223,7 +226,7 @@ Add a view manually
 
 Go back to the Books database.
 
-Select ``Plomino: view`` from the *Add item* Plone menu. Enter an
+Select ``Plomino: view`` from the :guilabel:`Add item` Plone menu. Enter an
 identifier (``allBooks``) and a title ('All the books'):
 
 .. image:: images/m57ed2659.png
@@ -246,12 +249,12 @@ You get the following result:
 
 .. image:: images/m64d1e0e7.png
 
-We just see a link '*Go*' which allows us to access the document we
+We just see a link :guilabel:`Go` which allows us to access the document we
 have created. Now we need to add columns to this view.
 
-Select ``Plomino: column`` from the *Add item* Plone menu.
+Select ``Plomino: column`` from the :guilabel:`Add item` Plone menu.
 
-Enter an identifier and a title, and enter a formula to compute the
+Enter an identifier and a title, and enter a :term:`formula` to compute the
 column value, for instance::
 
     return plominoDocument.getItem('bookTitle')
@@ -260,24 +263,24 @@ column value, for instance::
 
 Similarly, add a column to display ``bookAuthor``.
 
-Columns can be ordered by going to the view's *Contents* tab and moving the
-columns where needed.
+Columns can be ordered by going to the view's :guilabel:`Contents` tab and
+moving the columns where needed.
 
 If you go back to the Books database root, the view is proposed in the
-*Browse* section: 
+:guilabel:`Browse` section: 
 
 .. image:: images/m12df968f.png
 
-Create more documents. When you click on the link *All the books*, the
-view is displayed with its 2 columns (and its new documents): 
+Create more documents. When you click on the link :guilabel:`All the books`,
+the view is displayed with its 2 columns (and its new documents): 
 
 .. image:: images/6de65017.png
 
 To improve browsing of the documents, it could be useful to sort the
 view.
 
-To do that, click on *Edit*, go to the *Sorting* tab and enter
-``col1`` in the *Sorting* column, then save: 
+To do that, click on :guilabel:`Edit`, go to the :guilabel:`Sorting` tab and
+enter ``col1`` in the :guilabel:`Sorting` column, then save: 
 
 .. image:: images/193e0720.png
 
@@ -295,9 +298,9 @@ enter the following selection formula::
 
 you will only list the XIXth century books.
 
-You can create categorised views: create a view with a first column
-which contains the ``bookCategory`` field value, and select *Categorised*
-in the *Sorting* tab: 
+You can create *categorised* views: create a view with a first column
+which contains the ``bookCategory`` field value, and select
+:guilabel:`Categorised` in the :guilabel:`Sorting` tab: 
 
 .. image:: images/m233a2bba.png
 
@@ -306,21 +309,24 @@ Each category can be expanded or collapsed.
 Dynamic view
 ============
 
-Click on **Edit**, go to the **Parameters**, and change widget to **Dynamic table**.
-It renders the view using JQuery Datatables (column sorting, live filtering, ...).
+Click on :guilabel:`Edit`, go to the :guilabel:`Parameters`, and change
+widget to :guilabel:`Dynamic table`.  It renders the view using JQuery
+Datatables (column sorting, live filtering, ...).
 
 Add a search form
 =================
 
 Create a new form named ``frmSearch``, and add some fields with the same
 identifiers as the documents fields you want to be able to search; for
-instance: bookTitle, bookAuthor and bookCategory.
+instance: ``bookTitle``, ``bookAuthor`` and ``bookCategory``.
 
-In the **Parameters** tab, select 'Search form' and enter ``all`` in 'Search view': 
+In the :guilabel:`Parameters` tab, select 'Search form' and enter ``all`` in
+:guilabel:`Search view`: 
 
 .. image:: images/22e7de63.png
 
-This form is now proposed in the Search section in the Books database root: 
+This form is now proposed in the :guilabel:`Search` section in the Books
+database root: 
 
 .. image:: images/197da1a1.png
 
@@ -334,13 +340,14 @@ some criteria, the results are displayed under the form:
     document item names.
 
 
-``About`` and ``Using`` pages
-=============================
+:guilabel:`About` and :guilabel:`Using` pages
+==============================================
 
-Go to the Books database **Edit** tab. You can fill in the ``About this
-database`` section and the ``Using this database`` section.
+Go to the Books database :guilabel:`Edit` tab. You can fill in the 
+:guilabel:`About this database` section and the :guilabel:`Using this
+database` section.
 
-Information entered here will be available in the **About** and the
-**Using** tabs. It allows you to offer users a page to describe the
+Information entered here will be available in the :guilabel:`About` and the
+:guilabel:`Using` tabs. It allows you to offer users a page to describe the
 purpose of the application and another one to give a short user guide.
 
