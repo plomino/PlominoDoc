@@ -12,7 +12,7 @@ id
         It mustn't contain special characters or spaces.
     :Purpose:
         Field identifier. It is used in Plomino formulas to identify the
-        corresponding document item.                                                                   
+        corresponding document item.
 Field type
     :Value:
         - Selection list 
@@ -26,7 +26,7 @@ Field type
     :Purpose:
         Depending on the field type, the values entered in the field
         and/or the rendering of the field might be different. (See
-        Type-specific parameters.)
+        `Type-specific parameters`_.)
 Field mode
     :Value:
         - Editable 
