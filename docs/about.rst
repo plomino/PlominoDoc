@@ -4,7 +4,7 @@ About this Document
 
 This document is aimed at Plomino application designers and managers. 
 
-This document is published under the **Creative Commons by-sa-nc**
+This document is published under the `Creative Commons by-sa-nc`_
 licence.
 
 You are free:
@@ -24,3 +24,5 @@ Under the following conditions:
 - **Share Alike**. If you alter, transform, or build upon this work, you
   may distribute the resulting work only under the same or similar
   license to this one.
+
+.. _Creative Commons by-sa-nc: http://creativecommons.org/licenses/by-nc-sa/3.0/
