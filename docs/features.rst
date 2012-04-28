@@ -85,6 +85,8 @@ As you can see in this example, you can add user ids and/or user roles.
 For a better understanding of the methods available on Plomino objects,
 see below in this document.
 
+.. _actions:
+
 Actions
 =======
 
@@ -438,6 +440,13 @@ referenced by ``TARGETURL`` will be substituted for the subsequent div.
 .. Note:: Plomino does not currently offer UI support for this
     functionality.  To use it, you have to generate the desired content via
     Python, or enter it literally into the form layout. 
+
+Caching
+```````
+
+Parts of forms can be cached.
+
+.. TODO:: expand on this.
 
 Events
 ------

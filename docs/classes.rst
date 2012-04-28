@@ -1,6 +1,6 @@
------------------------
+=======================
 Plomino class reference
------------------------
+=======================
 
 Non-exhaustive list of the classes' methods.
 
@@ -9,40 +9,46 @@ Non-exhaustive list of the classes' methods.
 PlominoDatabase
 ===============
 
+.. note:: The includes methods inherited from base classes.
+
 ``callScriptMethod(self, scriptname, methodname, *args)``
-    calls a method named methodname in a file named scriptname, stored in
-    the ``resources`` folder. If the called method allows it, you may
-    pass some arguments.
+    Calls a method named ``methodname`` in a file named ``scriptname``,
+    stored in the ``resources`` folder. If the called method allows it, you
+    may pass some arguments.
 
 ``createDocument(self)``
-    returns a new empty document.
+    Returns a new empty document.
 
 ``deleteDocument(self, doc)``
-    deletes the document
+    Delete the document from database.
 
 ``deleteDocuments(self, ids=None, massive=True)``
-    batch delete documents from database. If ``massive`` is ``True``, the
+    Batch delete documents from database. If ``massive`` is ``True``, the
     ``onDelete`` formula and index updating are not performed (use
-    1`refreshDB1` to update).
+    ``refreshDB`` to update).
     
+``getAgent(self, agentid)``
+    Return a PlominoAgent, or None.
+
 ``getAgents(self)``
-    returns all the PlominoAgent objects stored in the database.
+    Returns all the PlominoAgent objects stored in the database.
 
 ``getAllDocuments(self)``
-    returns catalog brains for all the PlominoDocument objects stored in
+    Returns catalog brains for all the PlominoDocument objects stored in
     the database.
 
 ``getCurrentUser(self)``
-    returns the current user.
+    Returns the current user.
 
 ``getCurrentUserRights(self)``
-    returns the current user's access rights.
+    Returns the current user's access rights.
 
 ``getCurrentUserRoles(self)``
     returns the current user's roles.
 
 ``getDocument(self, docid)``
-    returns the PlominoDocument object corresponding to the identifier.
+    Returns the PlominoDocument object corresponding to the identifier, 
+    or ``None``.
 
 ``getForm(self, formname)``
     returns the PlominoForm object corresponding to the identifier.
@@ -82,7 +88,7 @@ PlominoDatabase
     returns all the PlominoView objects stored in the database.
 
 ``hasUserRole(self, userid, role)``
-    returns ``True`` if the specified user id has the given role.
+    Returns ``True`` if the specified user id has the given role.
 
 ``isCurrentUserAuthor(self, doc)``
     returns ``True`` if the current user is author of the given document
@@ -98,6 +104,8 @@ PlominoDatabase
     the default message to display if ``infoMsg`` is empty.  If ``error`` is
     ``False``, the message displays as an *informational* message; if
     ``True``, it displays as an *error* message.
+
+.. _document:
 
 PlominoDocument
 ===============
@@ -131,7 +139,8 @@ PlominoDocument
     returns the names of all the items existing in the document.
 
 ``getParentDatabase(self)``
-    returns the PlominoDatabase object which contains the document.
+    Normally used via acquisition by Plomino formulas operating on
+    documents, forms, etc.
 
 ``getRenderedItem(self, itemname, form=None, convertattachments=False)``
     returns the item value using the rendering corresponding to the
@@ -181,6 +190,8 @@ PlominoDocument
 ``setItem(self,name,value)``
     set the value (if the item does not exist, it is created).
 
+.. _form:
+
 PlominoForm
 ===========
 
@@ -206,6 +217,8 @@ PlominoForm
         the same method is available in PlominoDocument (and returns
         `False`), so it can be used transparently in any formula to know
         if the document is being created or not.
+
+.. _view:
 
 PlominoView
 ===========
@@ -280,6 +293,8 @@ PlominoUtils
 ``userInfo(db, userid)``
     returns the Member object corresponding to the user id (it may be
     used to get the user email address for instance).
+
+.. _agent:
 
 PlominoAgent
 ============

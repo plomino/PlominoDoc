@@ -57,6 +57,15 @@ application designer wants to be displayed in the view.
 A view contains *columns*. :term:`Column` contents is computed from data
 stored in the documents.
 
+.. _column:
+
+Columns
+-------
+
+A :dfn:`column` defines one column of a view. Each column formula is
+computed for each document in the view, and may look up data from anywhere
+in the database. 
+
 Search forms
 ============
 
