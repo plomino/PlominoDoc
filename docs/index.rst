@@ -19,6 +19,7 @@ Contents:
 
    about.rst
    introduction.rst
+   overview.rst
    install.rst
    concepts.rst
    build.rst
