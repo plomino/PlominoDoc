@@ -325,7 +325,7 @@ Functionality
 --------------
 
 That said, the current weak areas of Plomino are security, workflow, and
-references.
+references, as they must be implemented manually using formulas.
 
 Regarding workflow, perhaps AlphaFlow could be resurrected, or `zope.wfmc`_
 or `hurry.workflow`_ could be used. A DCWorkflow-based approach would not
