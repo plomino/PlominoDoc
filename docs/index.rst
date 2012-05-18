@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 =======================
-Plomino 1.14 user guide
+Plomino 1.15 user guide
 =======================
 
 :Author: Eric Brehault <eric.brehault@makina-corpus.com>
