@@ -9,8 +9,8 @@ Plomino is built on Plone, so in order to install Plomino, you first need to
 install Plone: go to http://plone.org, download Plone and follow the
 instructions.
 
-Deploy the Plomino egg
------------------------
+Deploy Plomino in your Plone site
+---------------------------------
 
 To deploy the Plomino product, you need to edit your ``buildout.cfg`` file
 and add the following in the ``eggs`` and ``zcml`` sections:
@@ -43,3 +43,16 @@ installable products. Select them and click :guilabel:`Install`.
 
 Once done, Plomino is installed, so when you are in a folder, you can add a 
 new Plomino database using the Plone :guilabel:`Add new...` menu.
+
+Deploy Plomino development version
+----------------------------------
+
+.. code-block:: sh
+
+    $ virtualenv --no-site-packages --distribute ./venv
+    $ cd ./venv
+    $ source bin/activate
+    $ git clone git://github.com/plomino/Plomino.git
+    $ cd ./Plomino
+    $ python bootstrap.py
+    $ bin/buildout -N
