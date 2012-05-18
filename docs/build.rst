@@ -254,12 +254,22 @@ have created. Now we need to add columns to this view.
 
 Select ``Plomino: column`` from the :guilabel:`Add item` Plone menu.
 
-Enter an identifier and a title, and enter a :term:`formula` to compute the
-column value, for instance::
-
-    return plominoDocument.getItem('bookTitle')
+Enter an identifier and a title, and select the field you want to display in 
+the column.
 
 .. image:: images/b38e0e1.png
+
+You can also enter a :term:`formula` to compute the column value, for 
+instance::
+
+    return plominoDocument.getItem('bookTitle').upper()
+
+.. Warning:: When you use a field as column value, the Plomino index will use
+   the field index.
+   So if you display this field as column in several views, it will not
+   increase the index size.
+   But when you create a formula, it creates an extra index, so having a lot
+   of column formulas might impact the database global performances.
 
 Similarly, add a column to display ``bookAuthor``.
 
@@ -312,6 +322,8 @@ Dynamic view
 Click on :guilabel:`Edit`, go to the :guilabel:`Parameters`, and change
 widget to :guilabel:`Dynamic table`.  It renders the view using JQuery
 Datatables (column sorting, live filtering, ...).
+
+.. image:: images/dynamic-view.png
 
 Add a search form
 =================
