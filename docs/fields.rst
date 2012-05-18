@@ -15,14 +15,17 @@ id
         corresponding document item.
 Field type
     :Value:
-        - Selection list 
-        - Name 
-        - Text 
-        - Number 
-        - Date/Time 
-        - File attachment 
-        - Rich text 
-        - Doclink                                
+        - Datagrid
+        - Date/Time
+        - Doclink
+        - File attachment
+        - Google chart
+        - Google visualization
+        - Name
+        - Number
+        - Rich text
+        - Selection list
+        - Text
     :Purpose:
         Depending on the field type, the values entered in the field
         and/or the rendering of the field might be different. (See
@@ -244,12 +247,12 @@ Separator
           Examples: ``;-,``
 
 Datagrid field
----------------
+--------------
 
 A datagrid field allows to edit a table. Rows are edited using an associated 
 form (displayed in a pop-up) in which fields are mapped to columns.
 
-.. image:: images/datagrid-settings.jpg
+.. image:: images/datagrid-example.png
 
 Associated form
     :Value:
@@ -266,6 +269,8 @@ Javascript settings
           Javascript
     :Purpose: 
           JQuery Datatables parameters
+
+.. image:: images/datagrid-settings.jpg
 
 Example: hide a column in a view
 ````````````````````````````````
