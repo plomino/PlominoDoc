@@ -28,11 +28,15 @@ Plomino needs to be coded defensively!
 current document on which the formula is evaluated.
 
 ``plominoContext`` is a reserved name which corresponds to the
-context in which the formula is evaluated. In many cases this will be 
-the same as ``plominoDocument``, but in some cases the formula is executed
-on an object which is not a Plomino document (but a :term:`view`, or a
-:term:`form`, for instance). 
+context in which the formula is evaluated. In some cases the formula is
+executed on an object which is not a Plomino document (but a :term:`view`,
+or a :term:`form`, for instance). 
 
+.. Note::
+    Technically, ``plominoDocument`` and ``plominoContext`` are just targeting
+    the very same object, which is the Zope ``context``.  ``plominoDocument``,
+    ``plominoContext``, ``context`` can be used identically.
+     
 Document items should be accessed using the ``getItem()`` method:
 ``plominoDocument.getItem('validationDate')``. 
 
