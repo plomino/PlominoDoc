@@ -91,7 +91,7 @@
     <link rel="alternate" type="application/rss+xml" title="Feed Title" href="_static/devs_feed.xml" />
     {{ metatags }}
     {%- if builder != 'htmlhelp' %}
-      {%- set titlesuffix = " &mdash; " + docstitle|e %}
+      {%- set titlesuffix = " - " + docstitle|e %}
     {%- endif %}
     <title>{{ title|striptags }}{{ titlesuffix }}</title>
     {%- if builder == 'web' %}
