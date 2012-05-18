@@ -70,8 +70,38 @@ Application-level access control
 ================================
 
 In addition to the global access rights, it may also be necessary to
-configure access to documents individually. As an example, here is one way
-to restrict document access to the creator of the document:
+configure access to documents individually.
+
+``Plomino_Readers`` and ``Plomino_Authors``
+-------------------------------------------
+
+``Plomino_Readers`` contains the list of users/groups/roles allowed to read
+the document.
+By default, this item does not exist, so users defined as readers according
+the database ACL can read the document.
+
+``Plomino_Authors`` contains the list of users/groups/roles allowed to edit
+the document.
+By default, this item contains the document creator's id, appending any
+other author id during the document life cycle.
+
+Those items can be easily editable using formulas:
+
+    # make sure [purchaser] role can always edit this document
+    current_authors = plominoDocument.getItem('Plomino_Authors')
+    if '[purchaser]' not in current_authors:
+        current_authors.append('[purchaser]')
+    plominoDocument.setItem('Plomino_Authors', current_authors)
+
+onOpenDocument event
+--------------------
+
+If the onOpenDocument event returns a string, it is considered as an error.
+The document will not be displayed, and the returned string will be displayed
+as a warning message.
+
+As an example, here is one way to restrict document access to the creator of
+the document:
 
 - create a field named ``creator`` (for instance). It should be of type
   ``Name`` and mode ``Computed on creation``, with the following formula::
