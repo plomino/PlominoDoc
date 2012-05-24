@@ -934,7 +934,7 @@ contain useful extra assets:
 - images or icons you may need to insert in your forms; 
 - CSS or javascript files; 
 - ZPT templates (see view template below); 
-- Python files, to provide a code library usable from the different
+- Python scripts, to provide a code library usable from the different
   formulas (using the `callScriptMethod` method); 
 - CSV (or other) files containing useful data; 
 - etc.
