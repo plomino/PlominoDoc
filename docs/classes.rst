@@ -265,6 +265,19 @@ PlominoUtils
     PlominoUtils is imported for any formula execution, its methods are
     always available (importing the module is not needed).
 
+``array_to_csv(array, delimiter='\t', quotechar='"')``
+    Convert ``array`` (a list of lists) to a CSV string.
+
+``asList(x)``
+    If not list, return x in a single-element list.
+    .. note:: If ``x`` is ``None``, this will return ``[None]``.
+
+``asUnicode(s)``
+    Make sure ``s`` is unicode, decode according to site encoding if needed.
+
+``csv_to_array(csvcontent, delimiter='\t', quotechar='"')``
+    Convert CSV to array. ``csvcontent`` may be a string or a file.
+
 ``DateRange(d1, d2)``
     returns the dates of all the days between the 2 dates.
 
@@ -274,18 +287,51 @@ PlominoUtils
 ``htmlencode(s)``
     replaces unicode characters with their corresponding html entities
 
+``isDocument(object)``
+    Test if the object is a PlominoDocument.
+    Useful to distinguish a document context from a form context.
+
+``json_dumps(obj)``
+    Return the object as a string using the JSON format. Example::
+
+        >>> json_dumps({"a": [1, 2, "This is a 'quote'"], "b": 0.098098})
+        '{"a": [1, 2, "This is a \'quote\'"], "b": 0.098098}'
+
+``json_loads(s)``
+    Build an object from a JSON string. Example::
+
+        >>> json_loads('{"a": [1, 2, "This is a \'quote\'"], "b": 0.098098}')
+        {u'a': [1, 2, u"This is a 'quote'"], u'b': 0.098098}
+
+``Log(message, summary='', severity='info', exc_info=False)``
+    Write a message to the server event log.
+
 ``Now()``
-    returns current date and time.
+    returns current date and time as a DateTime object.
+
+``open_url(url, asFile=False)``
+    Retrieve content from ``url``
 
 ``PlominoTranslate(message, context, domain='CMFPlomino')``
     translate the given message using the Plone i18n engine (using the
     given domain).
 
-``sendMail(db, recipients, title, html_message)``
-    send a mail to the recipients.
+``sendMail(db, recipients, title, html_message, sender=None, cc=None, bcc=None, immediate=False)``
+    Send a mail to the recipients.
+    If sender is None, it will use the current user mail address.
 
 ``StringToDate(str_d, format='%d/%m/%Y')``
     converts a string to a date.
+
+``PlominoTranslate(msgid, context, domain='CMFPlomino')``
+    Look up the translation for ``msgid`` in the current language.
+
+``urlencode(h)``
+    Convert a dictionary into a URL querystring (a key=value& string).
+    Example::
+    
+        >>> urlencode({"option": 5, "article": "9879879"})
+        'article=9879879&option=5'
 
 ``userFullname(db, userid)``
     returns the user full name.
