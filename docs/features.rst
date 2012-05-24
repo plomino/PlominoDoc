@@ -882,6 +882,145 @@ view, a page, a search form, etc.).
 In this case, go to your database :guilabel:`Edit` tab, and enter the
 element id in the :guilabel:`Start page` parameter.
 
+Plomino URLs
+============
+
+Database
+--------
+
+OpenDatabase
+    ``http://server/portal/db/OpenDatabase`` will open the database home page
+    which either the default home page, either the start page (if defined in
+    the database parameters).
+    Equivalent to:
+        - ``http://server/portal/db``
+        - ``http://server/portal/db/view``
+
+DatabaseDesign
+    ``http://server/portal/db/DatabaseDesign`` will open the database design
+    tab.
+
+DatabaseACL
+    ``http://server/portal/db/DatabaseACL`` will open the database ACL tab.
+
+DatabaseReplication
+    ``http://server/portal/db/DatabaseReplication`` will open the database
+    replication tab.
+
+View
+----
+
+OpenView
+    ``http://server/portal/db/myview/OpenView`` will display the view.
+    Equivalent to:
+        -``http://server/portal/db/myview``
+        -``http://server/portal/db/myview/view``
+
+exportCSV
+    ``http://server/portal/db/myview/exportCSV`` will download the view
+    content as a CSV file.
+
+exportXLS
+    ``http://server/portal/db/myview/exportXLS`` will download the view
+    content as an Excel file.
+
+tojson
+    ``http://server/portal/db/myview/tojson`` will return the view
+    content in JSON format.
+
+Form
+----
+
+OpenForm
+    ``http://server/portal/db/myform/OpenForm`` will render the form.
+    Equivalent to:
+        - ``http://server/portal/db/myform``
+        - ``http://server/portal/db/myform/view``
+
+OpenBareForm
+    ``http://server/portal/db/myform/OpenForm`` will render the form without
+    the Plone template.
+    It is useful when loading the form through an AJAX call, considering the
+    Plone skin is not needed in that case, and OpenBareForm will be more
+    performant.
+
+searchDocuments
+    *Only for search forms.*
+    ``http://server/portal/db/myform/searchDocuments?field1=value1`` will
+    search and display the search results according the parameters.
+
+tojson
+    ``http://server/portal/db/myform/tojson`` will return all the form fields
+    as JSON.
+    ``http://server/portal/db/myform/tojson?item=field1`` will return the form
+    field ``field1`` as JSON.
+    
+    .. Note:: the parameter is named ``item`` and not ``field`` in order to
+        expose the same signature as the document /tojson URL, so we do not
+        need to test the context in field formulas.
+
+Document
+--------
+
+OpenDocument
+    ``http://server/portal/db/doc1/OpenDocument`` will render the document in
+    read mode.
+    Equivalent to:
+        - ``http://server/portal/db/doc1``
+        - ``http://server/portal/db/doc1/view``
+    ``http://server/portal/db/doc1/OpenDocument?openwithform=form1`` will
+    render the document in read mode using the specified form.
+    
+EditDocument
+    ``http://server/portal/db/doc1/EditDocument`` will render the document in
+    edit mode.
+    Equivalent to ``http://server/portal/db/doc1/edit``.
+    ``http://server/portal/db/doc1/EditDocument?openwithform=form1`` will
+    render the document in edit mode using the specified form.
+
+DocumentProperties
+    ``http://server/portal/db/doc1/DocumentProperties`` will show all the
+    document information and stored items values.
+
+AccessControl
+    ``http://server/portal/db/doc1/AccessControl`` will show the current access
+    rights and roles in the context of the document.
+
+delete
+    ``http://server/portal/db/doc1/delete`` will delete the document.
+    ``http://server/portal/db/doc1/delete?returnurl=an_url`` will delete the
+    document and redirect to the specified URL.
+
+getfile
+    ``http://server/portal/db/doc1/getfile?filename=file1`` will download the
+    attached file ``file1``.
+
+deleteAttachment
+    ``http://server/portal/db/doc1/deleteAttachment?fieldname=field1&filename=file1``
+    will delete the attached file ``file1`` from the field ``field1``.
+
+tojson
+    ``http://server/portal/db/doc1/tojson`` will return all the document stored
+    items as JSON.
+    ``http://server/portal/db/doc1/tojson?item=item1`` will return the item
+    ``item1`` as JSON. It might be a non-stored item (Computed for display
+    field), and its value will be computed using the matching field from the
+    document's form.
+    ``http://server/portal/db/doc1/tojson?item=item1&formid=form1`` does the
+    same but the field is explicitly looked up from the ``form1`` form (which
+    is not necessarily the document's form).
+
+Agent
+-----
+
+runAgent
+    ``http://server/portal/db/agent1/runAgent`` will execute the agent.
+
+runAgent_async
+    *Requires plone.app.async.*
+    ``http://server/portal/db/agent1/runAgent`` will execute the agent in
+    asynchronous mode.
+
 Agents
 ======
 
