@@ -139,19 +139,19 @@ visible or not.
 If you select :guilabel:`Display action in action bar`, the action will be
 displayed together with the standard Plomino actions in the action bar.
 
-New in Plomino 1.5
-------------------
+But (in forms only) you can also choose to insert the action within the
+form layout directly.
 
-Actions can be inserted directly in the form layout using TinyMCE.
+With Tinymce, actions can be created and inserted directly in the form layout
+from the editor.
 
 Example:
 
 .. image:: images/m2899c882.png
 
-But (in forms only) you can also choose to insert the action within the
-form layout directly. You must use the :guilabel:`Plomino action` style in
-Kupu, and the action will be rendered according the :guilabel:`Action`
-display parameter (link, submit button, or button).
+With kupu, you must use the :guilabel:`Plomino action` style, and the action
+will be rendered according the :guilabel:`Action` display parameter (link,
+submit button, or button).
 
 Example:
 
@@ -182,6 +182,10 @@ Computed
 Computed on creation
     the field value is computed only once, the first time the document
     is saved.
+
+Computed on save
+    the field value is computed and stored each time the document is
+    saved.
 
 Computed for display
     the field value is computed each time the document is opened, but it
@@ -524,7 +528,7 @@ the book is damaged, it cannot be borrowed, so we hide the action to check
 the book availability).
 
 New in Plomino 1.5
-```````````````````
+``````````````````
 
 Hide-when formulas can be inserted directly in the form layout using TinyMCE.
 
@@ -556,7 +560,7 @@ The form is inserted using the Plomino :guilabel:`Subform` style in Kupu:
     form :guilabel:`Parameters` tab.
 
 New in Plomino 1.5
-```````````````````
+``````````````````
 
 Sub-forms can be inserted directly in the form layout using TinyMCE.
 
