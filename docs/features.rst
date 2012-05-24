@@ -895,6 +895,15 @@ and enter an identifier, a title and the code.
 This might be useful to run archiving, cleaning, etc. without giving
 manager rights to regular users.
 
+By default, an agent run using the current user access right, but it can also
+run using the designer (the owner) access right. That way, a regular user might
+launch an action that normally requires higher privileges if he was doing it
+manually.
+For instance, if an agent is in charge of archiving documents by moving them
+from the current database to another one, if regular users does not have
+access to the archive db, they would not be able to put some documents in that
+db. If the agent is executed as owner, it will not fail.
+
 The agent can be executed (from an action) using the ``runAgent()`` method::
 
     db = plominoDocument.getParentDatabase() 
@@ -913,13 +922,8 @@ The agent can also be executed from Python formulas by calling it directly::
 .. Note:: this method can take optional positional arguments. It does not
     redirect.
 
-If you install `ZpCron <http://old.zope.org/Members/janik/ZpCron>`_
-on your Zope instance, an agent can also be scheduled. You specify when the
-agent should run using a cron-like format.
-
-With ZpCron_, you can provide the id of a user that will be used to run the
-agent (so the access rights of that user are applied when the agent is
-executed, not those of the current user).
+If you install plone.app.async on your Zope instance, an agent can also be
+executed in asynchronuous mode.
 
 Resources
 =========
