@@ -419,43 +419,6 @@ So, for example, if you want to pass a parameter to another form:
 Forms
 =====
 
-Layout
-------
-
-Accordions and lazy loading
-```````````````````````````
-
-In Plomino it is possible to *accordion* some parts of the page.  This means
-that the content of the accordioned part will not be visible unless you click
-on the headline to open the accordion. 
-
-It is also possible to avoid loading the content of the accordion until such 
-time as the accordion is opened. This is particularly useful if the content 
-it very big, or if there are many accordions on a page and the reader is
-interested in only a few of them.
- 
-To turn part of a page into an accordion, use this structure (the header level
-can be from ``h2`` to ``h6``):
-
-.. code-block:: html
-
-    <h5 class="plomino-accordion-header"><a href="TARGETURL">Header</a></h5>
-    <div>Content</div>
-
-If the class is ``plomino-accordion-header``, the content of the page
-referenced by ``TARGETURL`` will be substituted for the subsequent div. 
-
-.. Note:: Plomino does not currently offer UI support for this
-    functionality.  To use it, you have to generate the desired content via
-    Python, or enter it literally into the form layout. 
-
-Caching
-```````
-
-Parts of forms can be cached.
-
-.. TODO:: expand on this.
-
 Events
 ------
 
@@ -527,9 +490,6 @@ hidden. If it returns ``False``, the area is displayed (in our example: if
 the book is damaged, it cannot be borrowed, so we hide the action to check
 the book availability).
 
-New in Plomino 1.5
-``````````````````
-
 Hide-when formulas can be inserted directly in the form layout using TinyMCE.
 
 Sub-forms
@@ -558,9 +518,6 @@ The form is inserted using the Plomino :guilabel:`Subform` style in Kupu:
     as you probably do not want ``borrowInfo`` to be displayed in the
     database home page, you have to check :guilabel:`Hide in menu` in the
     form :guilabel:`Parameters` tab.
-
-New in Plomino 1.5
-``````````````````
 
 Sub-forms can be inserted directly in the form layout using TinyMCE.
 
@@ -651,6 +608,77 @@ The form used to render a document is determined by a number of mechanisms:
 Example:
 
 http://localhost:8080/test/testdb/58862f161ea71732944d37e0a0489cfc?openwithform=frmtest
+
+Accordions and lazy loading
+---------------------------
+
+In Plomino it is possible to *accordion* some parts of the page.  This means
+that the content of the accordioned part will not be visible unless you click
+on the headline to open the accordion. 
+
+It is also possible to avoid loading the content of the accordion until such 
+time as the accordion is opened. This is particularly useful if the content 
+it very big, or if there are many accordions on a page and the reader is
+interested in only a few of them.
+ 
+To turn part of a page into an accordion, use this structure (the header level
+can be from ``h2`` to ``h6``):
+
+.. code-block:: html
+
+    <h5 class="plomino-accordion-header"><a href="TARGETURL">Header</a></h5>
+    <div>Content</div>
+
+If the class is ``plomino-accordion-header``, the content of the page
+referenced by ``TARGETURL`` will be substituted for the subsequent div. 
+
+.. Note:: Plomino does not currently offer UI support for this
+    functionality.  To use it, you have to generate the desired content via
+    Python, or enter it literally into the form layout. 
+
+Caching
+-------
+
+To improve performances, it might be useful to cache some fragments of a form
+so they are not re-computed everytime.
+Cached fragments are set in the layout the same way as hide-when formulas, with
+``start:cache-identifier`` and ``end:cache-identifier`` markers.
+The associated formula is supposed to return a cache key.
+When the form is rendered the first time, the resulting HTML contained into the
+delimited area will be stored in cache and associated with the cache key.
+Everytime the form will be rendered a new time, if the cache key returned by
+the formula matched an existing cache key, the cached HTML is returned.
+
+Consequently, if you use a formula returning always the same value, like::
+
+    "financial-report"
+
+the same cached fragment will be served to all the users in all the cases.
+
+If you use a formula which depends on the current user, like::
+
+    "personal-report-" + context.getCurrentUser().getMemberId()
+
+then there will be a different cached fragment for each user (so if the same
+user displays the form twice, he will received the cached content the second
+time, but other users would not get that cached fragment, they would get their
+own cache).
+
+The formula might depends on the date::
+
+     "today-report-" + DateToString(Now(), "%Y-%m-%d")
+
+or anything (the document id, any specific item value, etc.).
+
+If the cache key is None, cache is not applied, so for instance::
+
+     if context.isEditMode():
+         return None
+     else:
+         return "something-read"
+
+would show the cached content in read mode, but would always regenerate
+the content in edit mode.
 
 Views
 =====
