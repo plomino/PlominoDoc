@@ -1083,6 +1083,11 @@ To access this folder, go to the :guilabel:`Design` tab, expand the
 opens the standard :term:`ZMI` screen, which allows new elements to be
 added.
 
+Caching
+=======
+
+.. todo:: TO BE DONE. Explain setCache/getCache and setRequestCache
+
 Plomino Element Portlet
 =======================
 
