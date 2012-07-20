@@ -7,8 +7,8 @@ General parameters
 
 id
     :Value:
-        Free text. 
-        
+        Free text.
+
         It mustn't contain special characters or spaces.
     :Purpose:
         Field identifier. It is used in Plomino formulas to identify the
@@ -32,13 +32,13 @@ Field type
         `Type-specific parameters`_.)
 Field mode
     :Value:
-        - Editable 
-        - Computed 
-        - Computed for display 
+        - Editable
+        - Computed
+        - Computed for display
         - Computed on creation
     :Purpose:
         When editable, a field value can be entered by the user.
-        Otherwise, its value is computed using a formula. See 
+        Otherwise, its value is computed using a formula. See
         :ref:`computed-fields`.
 Formula
     :Value:
@@ -46,14 +46,14 @@ Formula
     :Purpose:
         Depending on the field mode, this formula will compute the field
         value (if computed), or just its default initial value (if
-        editable). **Note:** If the field is called using ``computeItem``, 
+        editable). **Note:** If the field is called using ``computeItem``,
         from some event or from some other field formula, the current field
         value will be overwritten even if it is an editable field.
 Field read template and field edit template
     :Value:
         .PT template id
     :Purpose:
-        The custom .pt template to use to render the field. See 
+        The custom .pt template to use to render the field. See
         :ref:`field-templates`.
 Validation formula
     :Value:
@@ -68,7 +68,91 @@ Add to index
     :Purpose:
         If ``True``, the field is added to the database index, allowing to
         perform search on its values.
+Index type
+    :Value:
+        ZCatalog index type
+    :Purpose:
+        Allow to define how the field must be indexed.
+        If ``Default``, the field is indexed using the index type associated
+        to its type.
 
+Field indexing
+==============
+
+Plomino allows to find documents according their field values when those fields
+are indexed.
+Search can be performed using a ``search form`` (see related paragraph) or
+programmatically using the ``dbsearch`` method::
+
+    db = context.getParentDatabase()
+    results = db.getIndex().dbsearch({'Form': 'frmEmployee,
+                                      'employee_department': 'HR'},
+                                     sortindex='employee_name')
+
+Note: sortindex is optionnal.
+
+The search behaviour depends on the index types.
+Zope/Plone offers a standard set of indexes, and the most common ones are:
+
+FieldIndex
+    :Behaviour:
+        - it accepts any type of values (text, dates, list, numbers, ...)
+        - it matches exact values,
+        - it allows sorting.
+    :Example:
+        If the field value is 'Jack London', it will match if we search
+        for 'Jack London', but not if we search 'Jack'
+
+DateIndex
+    :Behaviour:
+        - it handles date values in a more efficient way than FieldIndex,
+        - it allows sorting,
+        - it allows to search using a time interval.
+    :Examples:
+        Equality: db.getIndex().dbsearch({'EventDate': Now()+10})
+        Before: db.getIndex().dbsearch({'EventDate': {'query': Now(), 'range': 'max'}})
+        After: db.getIndex().dbsearch({'EventDate': {'query': Now()-7, 'range': 'min'}})
+        Interval: db.getIndex().dbsearch({'EventDate': {'query': [Now(), Now()+10], 'range': 'min:max'}})
+
+ZCTextindex
+    :Behaviour:
+        - it indexes text, and can match any contained word,
+        - it does not allow sorting,
+        - it allows wildcards and logical operator,
+        - it ignores non-meanningful words (like 'the', 'a', 'is', etc.).
+    :Example:
+        If the field value is 'Jack London was here a long time ago', it will
+        match if we search for:
+            - 'Jack London',
+            - 'Jack AND time',
+            - 'London AND NOT Paris',
+            - 'Lond*'.
+
+KeywordIndex
+    :Behaviour:
+        - it indexes lists, and match their values,
+        - it does not allow sorting.
+    :Example:
+        If the field value is ['Austerlitz', 'Iena', 'Waterloo'], it will
+        match if we search for:
+            - 'Austerlitz',
+            - ['Iena', 'Austerlitz'],
+            - {'query': ['Austerlitz', 'Azincourt'], 'operator': 'OR'}
+
+All the Plomino field types are associated to a default index type:
+
+- Text: FieldIndex,
+- Number: FieldIndex,
+- Rich text: ZCTextIndex,
+- Date/Time: DateIndex,
+- Name: FieldIndex,
+- Selection list: KeywordIndex,
+- File attachment: ZCTextIndex,
+- Doclink: KeywordIndex.
+
+The default index type can be changed using the ``Index type`` parameter, but
+it might produce side-effects (for instance if the field was used to sort
+views or search results, and its type is changed to a non-sortable index).
 
 Type-specific parameters
 ========================
@@ -84,12 +168,12 @@ Text field
 
 Widget
     :Value:
-        - ``Text``      
-        - ``Long text`` 
+        - ``Text``
+        - ``Long text``
     :Purpose: Text is rendered as a basic HTML input text field.
 Size
-    :Value: Integer       
-    :Purpose: 
+    :Value: Integer
+    :Purpose:
         - If Text widget: input text size.
         - If Long text: textarea rows.
 
@@ -104,27 +188,27 @@ Widget
             - ``Checkboxes``
             - ``Radio buttons``
     :Purpose: Note: multi selection list and checkboxes are multi-valued.
-Selection list 
+Selection list
     :Value: List of strings
     :Purpose:
         The possible values selectable in the field.
 
         Note: if a value contains a pipe (``|``), Plomino uses the string
         *before* the pipe as the entry label, and the string *after* as the
-        real value. 
+        real value.
 
         Example: ``United states of America|USA``
-Selection list formula 
+Selection list formula
     :Value: Python script
-    :Purpose: 
+    :Purpose:
         The formula must return the list of values selectable in the
         field (using the ``label|value`` format if necessary).
 
         Note: if a Selection list formula is provided, it overrides the
         Selection list to provide the field value list.
-Separator 
+Separator
     :Value: String
-    :Purpose: 
+    :Purpose:
         Used to separate the values in read mode for multi-valued fields
         and also in edit mode for radio buttons and checkboxes.
 
@@ -139,7 +223,7 @@ Name field
 .. image:: images/m608450e8.png
 
 Type
-    :Value: 
+    :Value:
         - ``Single valued``
         - ``Multi valued``
 Separator
@@ -221,12 +305,12 @@ Source view
 Label column
     :Value:
           The column used to provide the list labels
-    :Purpose: 
+    :Purpose:
           Only apply if Selection list or Multi selection list
 Documents list formula
-    :Value: 
+    :Value:
           Python script
-    :Purpose: 
+    :Purpose:
           This formula must return a list of string values formatted as
           follows: ``label|path_to_document``
 
@@ -237,9 +321,9 @@ Documents list formula
           - if a formula is provided, it overrides Source view and Label
             column.
 Separator
-    :Value: 
+    :Value:
           String
-    :Purpose: 
+    :Purpose:
           Used to separate the links in read mode.
 
           Default is blank.
@@ -249,7 +333,7 @@ Separator
 Datagrid field
 --------------
 
-A datagrid field allows to edit a table. Rows are edited using an associated 
+A datagrid field allows to edit a table. Rows are edited using an associated
 form (displayed in a pop-up) in which fields are mapped to columns.
 
 .. image:: images/datagrid-example.png
@@ -267,7 +351,7 @@ Columns/fields mapping
 Javascript settings
     :Value:
           Javascript
-    :Purpose: 
+    :Purpose:
           JQuery Datatables parameters
 
 .. image:: images/datagrid-settings.jpg
@@ -280,7 +364,7 @@ Parameters` field to include something like::
 
     'aoData': [{"bVisible": false}, null, null, null]
 
-You would need one item in the array for each column in the table. 
+You would need one item in the array for each column in the table.
 
 
 Google chart field
