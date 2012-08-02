@@ -42,6 +42,7 @@ because it allows Plomino to benefit from excellent Plone products very
 easily. 
 
 .. sidebar:: Pluggability vs. extensibility 
+
    For more on this topic, see
    this excellent post by 
    `Chris McDonough on Pyramid's extensibility
@@ -50,4 +51,4 @@ easily.
    <http://pauleveritt.wordpress.com/2011/01/14/chris-mcdonough-on-pluggable-apps/>`_.
    `Eric Bréhault
    <http://www.makina-corpus.org/blog/quel-prix-devient-vraiment-pluggable>`_
-   provides a wider perspective.
+   (in French) provides a wider perspective.
