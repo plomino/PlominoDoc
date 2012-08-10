@@ -265,6 +265,9 @@ PlominoUtils
     PlominoUtils is imported for any formula execution, its methods are
     always available (importing the module is not needed).
 
+    Another module with some useful methods is
+    ``Products.PythonScripts.standard``, which can be imported if needed.
+
 ``array_to_csv(array, delimiter='\t', quotechar='"')``
     Convert ``array`` (a list of lists) to a CSV string.
 

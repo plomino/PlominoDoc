@@ -11,6 +11,16 @@ The Plomino database is the Plone object which contains the application
 data (i.e. the Documents_), and its structure (i.e. the
 Design_).
 
+Design
+======
+
+The *design* of a Plomino application consists of the set of Forms_ and
+Views_ provided in the Plomino database.
+
+The design defines the structure of the application, and it is created by
+the application designer. It differs from the documents, which are the
+application data, created by the users.
+
 Forms
 =====
 
@@ -28,6 +38,23 @@ Forms are not always used to create or view documents |---| sometimes they
 are used to provide specific features (see `Search forms`_, and 
 `Page forms`_).
 
+Search forms
+------------
+
+The application designer can create specific forms dedicated to perform
+searches. These forms are not used to create documents, but to input the
+search criteria.
+
+It allows the designer to provide more specific and more business-oriented
+search features than the global Plone search.
+
+Page forms
+----------
+
+The application designer can create page forms to build custom navigation 
+menus, generate reports, provide portlet content, etc.
+
+
 Documents
 =========
 
@@ -42,9 +69,9 @@ given :term:`form`.
    the type of field may be different. Care should be taken to maintain
    consistency: make sure that the form matches the document. 
 
-    This mechanism allows the document rendering and the displayed action
-    buttons to change according to different parameters (user access rights,
-    current document state, field values, etc.).
+   This mechanism allows the document rendering and the displayed action
+   buttons to change according to different parameters (user access rights,
+   current document state, field values, etc.).
 
 Views
 =====
@@ -65,31 +92,5 @@ Columns
 A :dfn:`column` defines one column of a view. Each column formula is
 computed for each document in the view, and may look up data from anywhere
 in the database. 
-
-Search forms
-============
-
-The application designer can create specific forms dedicated to perform
-searches. These forms are not used to create documents, but to input the
-search criteria.
-
-It allows the designer to provide more specific and more business-oriented
-search features than the global Plone search.
-
-Page forms
-==========
-
-The application designer can create page forms to build custom navigation 
-menus, generate reports, provide portlet content, etc.
-
-Design
-======
-
-The *design* of a Plomino application consists of the set of forms and views
-provided in the Plomino database.
-
-The design defines the structure of the application, and it is created by
-the application designer. It differs from the documents, which are the
-application data, created by the users.
 
 .. |---| unicode:: U+02014 .. em dash

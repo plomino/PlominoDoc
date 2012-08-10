@@ -85,36 +85,37 @@ Search can be performed using a ``search form`` (see related paragraph) or
 programmatically using the ``dbsearch`` method::
 
     db = context.getParentDatabase()
-    results = db.getIndex().dbsearch({'Form': 'frmEmployee,
-                                      'employee_department': 'HR'},
-                                     sortindex='employee_name')
+    results = db.getIndex().dbsearch({
+                    'Form': 'frmEmployee,
+                    'employee_department': 'HR'},
+                    sortindex='employee_name')
 
-Note: sortindex is optionnal.
+Note: ``sortindex`` is optionnal.
 
 The search behaviour depends on the index types.
 Zope/Plone offers a standard set of indexes, and the most common ones are:
 
-FieldIndex
+``FieldIndex``
     :Behaviour:
         - it accepts any type of values (text, dates, list, numbers, ...)
         - it matches exact values,
         - it allows sorting.
     :Example:
         If the field value is 'Jack London', it will match if we search
-        for 'Jack London', but not if we search 'Jack'
+        for 'Jack London', but not if we search for 'Jack'.
 
-DateIndex
+``DateIndex``
     :Behaviour:
         - it handles date values in a more efficient way than FieldIndex,
         - it allows sorting,
         - it allows to search using a time interval.
     :Examples:
-        Equality: db.getIndex().dbsearch({'EventDate': Now()+10})
-        Before: db.getIndex().dbsearch({'EventDate': {'query': Now(), 'range': 'max'}})
-        After: db.getIndex().dbsearch({'EventDate': {'query': Now()-7, 'range': 'min'}})
-        Interval: db.getIndex().dbsearch({'EventDate': {'query': [Now(), Now()+10], 'range': 'min:max'}})
+        Equality: ``db.getIndex().dbsearch({'EventDate': Now()+10})``
+        Before: ``db.getIndex().dbsearch({'EventDate': {'query': Now(), 'range': 'max'}})``
+        After: ``db.getIndex().dbsearch({'EventDate': {'query': Now()-7, 'range': 'min'}})``
+        Interval: ``db.getIndex().dbsearch({'EventDate': {'query': [Now(), Now()+10], 'range': 'min:max'}})``
 
-ZCTextindex
+``ZCTextindex``
     :Behaviour:
         - it indexes text, and can match any contained word,
         - it does not allow sorting,
@@ -128,36 +129,39 @@ ZCTextindex
             - 'London AND NOT Paris',
             - 'Lond*'.
 
-KeywordIndex
+``KeywordIndex``
     :Behaviour:
         - it indexes lists, and match their values,
         - it does not allow sorting.
     :Example:
-        If the field value is ['Austerlitz', 'Iena', 'Waterloo'], it will
+        If the field value is ``['Austerlitz', 'Iena', 'Waterloo']``, it will
         match if we search for:
-            - 'Austerlitz',
-            - ['Iena', 'Austerlitz'],
-            - {'query': ['Austerlitz', 'Azincourt'], 'operator': 'OR'}
+            - ``'Austerlitz'``,
+            - ``['Iena', 'Austerlitz']``,
+            - ``{'query': ['Austerlitz', 'Azincourt'], 'operator': 'OR'}``
 
 All the Plomino field types are associated to a default index type:
 
-- Text: FieldIndex,
-- Number: FieldIndex,
-- Rich text: ZCTextIndex,
-- Date/Time: DateIndex,
-- Name: FieldIndex,
-- Selection list: KeywordIndex,
-- File attachment: ZCTextIndex,
-- Doclink: KeywordIndex.
+- Text: ``FieldIndex``,
+- Number: ``FieldIndex``,
+- Rich text: ``ZCTextIndex``,
+- Date/Time: ``DateIndex``,
+- Name: ``FieldIndex``,
+- Selection list: ``KeywordIndex``,
+- File attachment: ``ZCTextIndex``,
+- Doclink: ``KeywordIndex``.
 
-The default index type can be changed using the ``Index type`` parameter, but
-it might produce side-effects (for instance if the field was used to sort
-views or search results, and its type is changed to a non-sortable index).
+The default index type can be changed using the ``Index type`` parameter,
+but doing so might produce side-effects 
+(for instance if the field was used to sort views or search results,
+and its type is changed to a non-sortable index, this will break sorted
+views).
 
 Type-specific parameters
 ========================
 
-Type-specific parameters are available in the field's Settings tab:
+Type-specific parameters are available in the field's :guilabel:`Settings`
+tab:
 
 .. image:: images/7ef734a8.png
 
@@ -174,8 +178,8 @@ Widget
 Size
     :Value: Integer
     :Purpose:
-        - If Text widget: input text size.
-        - If Long text: textarea rows.
+        - If "Text widget": input text size.
+        - If "Long text": textarea rows.
 
 .. image:: images/m1f045a32.png
 

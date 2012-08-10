@@ -53,8 +53,8 @@ application.
 
 For instance, if you build a Plomino application to handle purchase
 requests, all the employees will be able to use the form to submit a
-purchase request, but only the users with the ``[FinancialReponsible]``
-role would be able to modify the *Approval* section in this form.
+purchase request, but in the form you would check for the
+``[FinancialReponsible]`` role to allow access to the *Approval* section.
 
 .. Note:: roles are always noted with brackets.
 
@@ -85,18 +85,19 @@ the document.
 By default, this item contains the document creator's id, appending any
 other author id during the document life cycle.
 
-Those items can be easily editable using formulas:
+Those items can be easily editable using formulas::
 
-    # make sure [purchaser] role can always edit this document
+    # Make sure that the [purchaser] role can always edit this document
     current_authors = plominoDocument.getItem('Plomino_Authors')
     if '[purchaser]' not in current_authors:
         current_authors.append('[purchaser]')
     plominoDocument.setItem('Plomino_Authors', current_authors)
 
-onOpenDocument event
---------------------
+``onOpenDocument`` event
+---------------------------
 
-If the onOpenDocument event returns a string, it is considered as an error.
+If the ``onOpenDocument`` event returns a string, it is considered as an
+error.
 The document will not be displayed, and the returned string will be displayed
 as a warning message.
 
@@ -126,13 +127,13 @@ the document:
     if member_id == plominoDocument.getItem('creator'):
         return None
 
-    roles=plominoDocument.getCurrentUserRoles()
+    roles = plominoDocument.getCurrentUserRoles()
     if "[controller]" in roles:
         return None
 
     return "You are not allowed to view this document."
 
-.. Note: in this formula, we're checking for the ``[controller]`` custom
+.. Note:: in this formula, we're checking for the ``[controller]`` custom
    role, instead of the ``PlominoManager`` role. While this does imply that
    you have to give this role to everyone who has the ``PlominoManager``
    role, it allows you to distinguish between functional managers (who will

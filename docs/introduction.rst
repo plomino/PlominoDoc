@@ -20,20 +20,20 @@ complex processing -- all entirely through the Plone web interface.
 Plomino is used in deployments with over 50 000 documents. Users include 
 the UN, European banks and local government organizations.
 
-Most Plomino users are Plone users who are not Plone developers (or just
-beginners), who, once they have built a nice website with Plone, find that
-they are not able to develop specific features using the standard Plone
-frameworks.
+Most Plomino users are Plone users who are not Plone developers (sometime
+just beginners, and sometimes experienced integrators), who, once they have
+built a nice website with Plone, find that specific features are not
+available using the standard Plone modules.
 
-And a smaller part are actual Plone developers who appreciate Plomino
+A smaller number are actual Plone developers who appreciate Plomino
 because it is extremely flexible or because they want their customers to
 be more autonomous once they have delivered their work.
 
 Plomino derives various benefits from existing as a Plone add-on.
 
 In the first place, Plone provides a wonderful framework, including key
-components for Plomino (ZCatalog, zope security, PythonScripts, ...), and
-Plone also provides very useful features (CMS features, user management,
+components for Plomino (``ZCatalog``, Zope security, PythonScripts, ...),
+and Plone also provides very useful features (CMS features, user management,
 skinning, etc.).  
 
 But the main advantage is the pluggability of Plone. Plone is the only major
@@ -44,8 +44,8 @@ easily.
 .. sidebar:: Pluggability vs. extensibility 
 
    For more on this topic, see
-   this excellent post by 
-   `Chris McDonough on Pyramid's extensibility
+   this excellent post by Chris McDonough on 
+   `Pyramid's extensibility
    <http://groups.google.com/group/pylons-discuss/msg/b19df600ddb8be3f>`_,
    along with `Paul Everitt's commentary
    <http://pauleveritt.wordpress.com/2011/01/14/chris-mcdonough-on-pluggable-apps/>`_.

@@ -20,8 +20,8 @@ Plomino trades a number of core Plone concepts for flexibility and
 simplicity. In the first place, it offers only one type of content: a
 generic :ref:`Document <document>` type. Secondly, it eschews containment
 for documents, using Plone's containment system only for its own simple
-application structure.  Similarly, Plone's cut/copy/paste operations don't
-make sense for Plomino documents.
+application structure.  Consequently, Plone's cut/copy/paste operations
+don't make sense for Plomino documents.
 
 A Plomino application or database is a single container which holds
 :ref:`Forms <form>`, :ref:`Views <view>`, and :ref:`Agents <agent>`. It also
@@ -40,7 +40,7 @@ with a large richtext edit field. Here, you simply type out the layout of
 the form. Add tables, images, explanatory text, whatever you need. The 
 one departure: you also create *fields*, *actions*, *hide-whens*,
 *subforms*, *accordions*, and *cache-zones* on the layout using
-Plomino-specific tinymce buttons. 
+Plomino-specific TinyMCE buttons. 
 
 This allows very quick prototyping of forms, and it broadens participation
 in form design. This is not equally valuable for all applications, or for
@@ -62,7 +62,7 @@ Follow me closely here: if you create a *Book* **form** with *Title* and
 *Author* **items**.  Another form, say *Trip*, may create documents with
 items like *Departure*, *Destination* and *Passenger*. Documents are simply
 generic bags of items.  They are both created and viewed using forms, that
-render the items found on the document using fields corresponding fields on
+render the items found on the document using the corresponding fields on
 the form. (Note that a given form may not have fields for all the items on
 the document, and there may be fields that do not correspond to items but
 that render values based on other items or other documents.)
@@ -79,7 +79,9 @@ items to be updated.
 
 While viewing documents, you are also using forms. At this point it's more
 useful to think of a Form in terms of a template or mask: the form will
-render the items that correspond to its fields.
+render those items that correspond to its fields 
+(there may be more items than fields; these may be ignored, or the formula
+of one field may look at multiple items).
 
 When you use a Form to create or edit a document, it stores its name in a
 ``Form`` item on the document, so you could grab all books by looking for
@@ -307,10 +309,11 @@ A quick list of ways to make life difficult for yourself:
 - Store derived fields that are not computed for display (once you do this,
   you have to worry about keeping derived fields current when editing the
   reference documents).
-- Have a field called "A" in both forms "B" & "C", both used to show doc
-  "D", but the definition of the field on "B" is incompatible with the field
-  on "C". (This could happen if you forget to update both forms and migrate 
-  existing documents.)
+- Have a field called "Amount" in both forms "B" & "C", both used to show
+  doc "D", but the definition of the field on "B" is incompatible with the
+  field on "C" (e.g. in the one case it's an integer value, and in the other
+  it's a currency-formatted string. (This could happen if you forget to
+  update both forms and migrate existing documents.)
 
 Ideas for improvement 
 =======================
@@ -361,8 +364,8 @@ Restricted Python, and rendering a form which pulls content from many
 related documents can pull lots of big fat Archetypes-based objects into
 memory.  The contents of a view is anything that evaluates ``True`` for the
 view's selection formula, which may be expensive. Not bad when done
-incrementally, but can be pretty bad when refreshing the view for thousands
-of documents.
+incrementally, but it can be pretty bad when refreshing the view for
+thousands of documents.
 
 Plomino does provide an extension mechanism, so you can move aspects of your
 application to filesystem-based Python code if they are mature enough and

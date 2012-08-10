@@ -1,8 +1,3 @@
-.. Plomino documentation master file, created by
-   sphinx-quickstart on Fri Mar 12 17:06:28 2010.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 =======================
 Plomino 1.15 user guide
 =======================

@@ -10,7 +10,7 @@ To create a Plomino database, select ``Plomino: database`` in the
 
 .. image:: images/m440f207a.png
 
-Enter a title for the database (for instance *Books*) and save it.
+Enter a title for the database (for instance *Library*) and save it.
 
 Add a form
 ==========
@@ -98,7 +98,7 @@ You can now use this form to create documents.
 
 .. image:: images/build-6.png
 
-Go back to the *Books* database. The database welcome page now contains a
+Go back to the *Library* database. The database welcome page now contains a
 link to add a new document using the ``Book description`` form:
 
 .. image:: images/build-7.png
@@ -116,7 +116,7 @@ You can enter values and save, and a new document will be created:
 Explore the database design
 ===========================
 
-Go to the *Books* database and click the :guilabel:`Design` tab.
+Go to the *Library* database and click the :guilabel:`Design` tab.
 
 This tab displays all the design elements contained in the database: 
 
@@ -192,7 +192,7 @@ Add a view
 ==========
 
 A :term:`view` defines a collection of documents. Some views are used to
-present list of documents to users, and some are used from formulas to
+present lists of documents to users, and some are used from formulas to
 structure the Plomino application. 
 
 A view has a selection formula, which defines which documents form part of
@@ -224,7 +224,7 @@ tab. The column labels can also be changed.
 Add a view manually
 ===================
 
-Go back to the Books database.
+Go back to the *Library* database.
 
 Select ``Plomino: view`` from the :guilabel:`Add item` Plone menu. Enter an
 identifier (``allBooks``) and a title ('All the books'):
@@ -236,14 +236,12 @@ Enter a selection formula too: this formula must return ``True`` or
 ``True``, the document is included in the view; if ``False``, it is
 rejected.
 
-Enter the following expression::
+Enter the following expression and hit :guilabel:`Save`::
 
-    True
+    return True
 
-(this expression always return ``True``, so all the documents will be
+(this expression always returns ``True``, so all the documents will be
 displayed).
-
-Save.
 
 You get the following result: 
 
@@ -268,15 +266,16 @@ instance::
    the field index.
    So if you display this field as column in several views, it will not
    increase the index size.
-   But when you create a formula, it creates an extra index, so having a lot
-   of column formulas might impact the database global performances.
+   But when you create a formula, it will create a new column-specific
+   index, so having a lot of column formulas might impact the database
+   global performances.
 
 Similarly, add a column to display ``bookAuthor``.
 
 Columns can be ordered by going to the view's :guilabel:`Contents` tab and
 moving the columns where needed.
 
-If you go back to the Books database root, the view is proposed in the
+If you go back to the Library database root, the view is proposed in the
 :guilabel:`Browse` section: 
 
 .. image:: images/m12df968f.png
@@ -337,7 +336,7 @@ In the :guilabel:`Parameters` tab, select 'Search form' and enter ``all`` in
 
 .. image:: images/22e7de63.png
 
-This form is now proposed in the :guilabel:`Search` section in the Books
+This form is now proposed in the :guilabel:`Search` section in the Library
 database root: 
 
 .. image:: images/197da1a1.png
@@ -355,11 +354,12 @@ some criteria, the results are displayed under the form:
 :guilabel:`About` and :guilabel:`Using` pages
 ==============================================
 
-Go to the Books database :guilabel:`Edit` tab. You can fill in the 
+Go to the *Library* database :guilabel:`Edit` tab. You can fill in the 
 :guilabel:`About this database` section and the :guilabel:`Using this
 database` section.
 
-Information entered here will be available in the :guilabel:`About` and the
-:guilabel:`Using` tabs. It allows you to offer users a page to describe the
-purpose of the application and another one to give a short user guide.
+Information entered here will be available under the :guilabel:`About` and
+the :guilabel:`Using` tabs.
+It allows you to offer users a page to describe the purpose of the
+application and another one to give a short user guide.
 
