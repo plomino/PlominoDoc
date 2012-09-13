@@ -284,6 +284,31 @@ File attachment field
 
 No specific parameters.
 
+A file attachment field involves both a document item and a file. 
+The item is named for the field and is set to a dictionary 
+``{filename: contenttype}`` when edited through the web.
+
+When dealing with attachment fields in formulas, both the item and the file
+need to be managed. For example::
+
+    i = 'itemname'
+    filename, contenttype = doc.setfile(
+            myfile,
+            filename='%s.csv'%i,
+            overwrite=True)
+    doc.setItem(i, {filename: contenttype}) 
+
+For a multi-valued field, this would be::
+
+    i = 'itemname'
+    filename, contenttype = doc.setfile(
+            myfile,
+            filename='%s.csv'%i,
+            overwrite=True)
+    doc.setItem(i, doc.getItem(i).update({filename: contenttype})) 
+
+The same goes for deleting files (use the ``deletefile`` API).
+
 Rich text field
 ---------------
 
