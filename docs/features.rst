@@ -670,7 +670,7 @@ The formula might depends on the date::
 
 or anything (the document id, any specific item value, etc.).
 
-If the cache key is None, cache is not applied, so for instance::
+If the cache key is ``None``, caching is not applied, so for instance::
 
      if context.isEditMode():
          return None
@@ -1142,9 +1142,6 @@ and they will be available from any Plomino formula.
 
 Example::
 
-    from zope import component
-    from Products.PythonScripts.Utility import allow_module
-
 Create the utility methods in your extension module (e.g.
 ``mypackage.mymodule``)::
 
@@ -1158,12 +1155,14 @@ Create the utility methods in your extension module (e.g.
 
 Create a class to declare them::
 
-    class UnepUtils:
+    class MyUtils:
         module = "mypackage.mymodule"
         methods = ['jsonify', 'dejsonify']
 
 Declare the module as safe so it can be called from Python Scripts (all
 Plomino :term:`formula` are Python Scripts)::
+
+    from Products.PythonScripts.Utility import allow_module
 
     allow_module("mypackage.mymodule")
 
