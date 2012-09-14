@@ -171,6 +171,8 @@ Computed fields
 ---------------
 
 In a form, the fields where the user can enter data are in *edit* mode.
+Upon form submission, user-submitted fields are set on the document *before*
+computed fields are evaluated. 
 
 You might also need to use fields which can not be changed by the user.
 Here are the other modes offered in Plomino:
@@ -205,6 +207,9 @@ and insert it in the ``frmBook`` form:
 
 .. image:: images/m434a6b5d.png 
 
+.. Note:: If your computed field A depends on computed field B, the formula
+    for A needs to compute B first. This will result in B being computed
+    twice, so consider caching if needed. 
 
 Validation
 ----------
