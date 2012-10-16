@@ -1136,6 +1136,10 @@ The new portlet is now displayed alongside the page.
 
 .. image:: images/element-portlet-display.png
 
+You can control if the portlet must be displayed or not by adding a field
+named `Plomino_Portlet_Availability` which formula must return True or
+False.
+
 Extending Plomino with plugins
 ==============================
 
