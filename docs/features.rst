@@ -211,6 +211,10 @@ and insert it in the ``frmBook`` form:
     for A needs to compute B first. This will result in B being computed
     twice, so consider caching if needed. 
 
+.. Note:: Commenting out parts of a form by editing the HTML hides that from 
+    the browser, but not from Plomino: if the commented part(s) contain
+    computed fields, they will still be computed.
+
 Validation
 ----------
 
