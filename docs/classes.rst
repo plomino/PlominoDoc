@@ -268,6 +268,15 @@ PlominoUtils
     Another module with some useful methods is
     ``Products.PythonScripts.standard``, which can be imported if needed.
 
+``actual_context(context, search="PlominoDocument")``
+    return the actual context from the request, it will drill into the 
+    path until it find a context matching the searched class.
+    Useful in portlet context
+
+``actual_path(context)``
+    return the actual path from the request.
+    Useful in portlet context
+
 ``array_to_csv(array, delimiter='\t', quotechar='"')``
     Convert ``array`` (a list of lists) to a CSV string.
 
@@ -335,6 +344,13 @@ PlominoUtils
     
         >>> urlencode({"option": 5, "article": "9879879"})
         'article=9879879&option=5'
+
+``urlquote(string)``
+    Replace special characters in string using the %xx escape.
+    Example::
+    
+        >>> urlquote('runAgent?REDIRECT=True&action=accept')
+        'runAgent%3FREDIRECT%3DTrue%26action%3Daccept'
 
 ``userFullname(db, userid)``
     returns the user full name.
