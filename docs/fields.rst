@@ -51,9 +51,9 @@ Formula
         value will be overwritten even if it is an editable field.
 Field read template and field edit template
     :Value:
-        .PT template id
+        Page template id
     :Purpose:
-        The custom .pt template to use to render the field. See
+        The custom ``.pt`` template to use to render the field. See
         :ref:`field-templates`.
 Validation formula
     :Value:
@@ -74,12 +74,12 @@ Index type
     :Purpose:
         Allow to define how the field must be indexed.
         If ``Default``, the field is indexed using the index type associated
-        to its type.
+        with its type.
 
 Field indexing
 ==============
 
-Plomino allows to find documents according their field values when those fields
+Plomino allows you to find documents according their field values when those fields
 are indexed.
 Search can be performed using a ``search form`` (see related paragraph) or
 programmatically using the ``dbsearch`` method::
@@ -138,7 +138,7 @@ Zope/Plone offers a standard set of indexes, and the most common ones are:
         match if we search for:
             - ``'Austerlitz'``,
             - ``['Iena', 'Austerlitz']``,
-            - ``{'query': ['Austerlitz', 'Azincourt'], 'operator': 'OR'}``
+            - ``{'query': ['Austerlitz', 'Agincourt'], 'operator': 'OR'}``
 
 All the Plomino field types are associated to a default index type:
 

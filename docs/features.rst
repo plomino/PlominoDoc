@@ -126,7 +126,7 @@ Then select the action type:
   code``, and redirect to the current object (in read mode). Examples: send
   a mail notification to someone, compute a field value and update the
   document with this new value, etc. If the formula returns a string,
-  Plomino will will assume it is a URL and use it for redirection.
+  Plomino will assume it is a URL and use it for redirection.
 
 - :guilabel:`Redirect`: same as ``Python script``, but the formula should
   return an URL that will be used for redirection. Example: create a new
@@ -177,23 +177,23 @@ computed fields are evaluated.
 You might also need to use fields which can not be changed by the user.
 Here are the other modes offered in Plomino:
 
-Computed
+:guilabel:`Computed`
     the field value is computed with a formula each time the document is
     opened, and it is saved each time the document is saved.
 
-Computed on creation
+:guilabel:`Computed on creation`
     the field value is computed only once, the first time the document
     is saved.
 
-Computed on save
+:guilabel:`Computed on save`
     the field value is computed and stored each time the document is
     saved.
 
-Computed for display
+:guilabel:`Computed for display`
     the field value is computed each time the document is opened, but it
     is not saved.
 
-Example: create a *Computed for display* field with this formula::
+Example: create a :guilabel:`Computed for display` field with this formula::
 
     category = plominoDocument.getItem('bookCategory') 
     if category: 
@@ -421,7 +421,8 @@ So, for example, if you want to pass a parameter to another form:
 - in the target form, create an editable field with the same id as the
   parameter key (e.g. ``param1`` and ``param2`` above), but do not insert it
   in the form layout. The field will get its value from the ``REQUEST``.  -
-  then you can create ``Computed on save`` (or on display, or whatever)
+  then you can create :guilabel:`Computed on save` (or on display, or
+  whatever)
   fields which use the value of this field.
 
 
@@ -460,15 +461,15 @@ need.
 
 Example: enter the following formula for the ``onSaveDocument`` event::
 
-    date=DateToString(DateTime()) 
-    db=plominoDocument.getParentDatabase() 
-    user=userFullname(db, db.getCurrentUser()) 
+    date = DateToString(DateTime()) 
+    db = plominoDocument.getParentDatabase() 
+    user = userFullname(db, db.getCurrentUser()) 
     plominoDocument.setItem(
         'history',
         plominoDocument.getItem('history') +
         "This document has been modified by "+user+" on "+date)
 
-it will update the ``history`` item which logs all the modifications,
+It will update the ``history`` item which logs all the modifications,
 authors and dates.
 
 Hide-when formulas
@@ -484,7 +485,7 @@ Select :guilabel:`Plomino: hide when` in the :guilabel:`Add item` Plone
 menu.
 
 Enter an identifier, a title, and a formula. Example:
-``plominoDocument.bookState=='Damaged```
+``plominoDocument.bookState == 'Damaged'``
 
 Then, modify the form layout to insert the hide-when formula in the form
 layout. Enter the following: ``start:hide-when-identifier``
@@ -897,137 +898,147 @@ Plomino URLs
 Database
 --------
 
-OpenDatabase
-    ``http://server/portal/db/OpenDatabase`` will open the database home page
+``OpenDatabase``
+    ``http://server/plone/db/OpenDatabase`` will open the database home page
     which either the default home page, either the start page (if defined in
     the database parameters).
     Equivalent to:
-        - ``http://server/portal/db``
-        - ``http://server/portal/db/view``
+        - ``http://server/plone/db``
+        - ``http://server/plone/db/view``
 
-DatabaseDesign
-    ``http://server/portal/db/DatabaseDesign`` will open the database design
+``DatabaseDesign``
+    ``http://server/plone/db/DatabaseDesign`` will open the database design
     tab.
 
-DatabaseACL
-    ``http://server/portal/db/DatabaseACL`` will open the database ACL tab.
+``DatabaseACL``
+    ``http://server/plone/db/DatabaseACL`` will open the database ACL tab.
 
-DatabaseReplication
-    ``http://server/portal/db/DatabaseReplication`` will open the database
+``DatabaseReplication``
+    ``http://server/plone/db/DatabaseReplication`` will open the database
     replication tab.
 
 View
 ----
 
-OpenView
-    ``http://server/portal/db/myview/OpenView`` will display the view.
+``OpenView``
+    ``http://server/plone/db/myview/OpenView`` will display the view.
     Equivalent to:
-        -``http://server/portal/db/myview``
-        -``http://server/portal/db/myview/view``
+        - ``http://server/plone/db/myview``
+        - ``http://server/plone/db/myview/view``
 
-exportCSV
-    ``http://server/portal/db/myview/exportCSV`` will download the view
+``exportCSV``
+    ``http://server/plone/db/myview/exportCSV`` will download the view
     content as a CSV file.
 
-exportXLS
-    ``http://server/portal/db/myview/exportXLS`` will download the view
+``exportXLS``
+    ``http://server/plone/db/myview/exportXLS`` will download the view
     content as an Excel file.
 
-tojson
-    ``http://server/portal/db/myview/tojson`` will return the view
+``tojson``
+    ``http://server/plone/db/myview/tojson`` will return the view
     content in JSON format.
 
 Form
 ----
 
-OpenForm
-    ``http://server/portal/db/myform/OpenForm`` will render the form.
+``OpenForm``
+    ``http://server/plone/db/myform/OpenForm`` will render the form.
     Equivalent to:
-        - ``http://server/portal/db/myform``
-        - ``http://server/portal/db/myform/view``
+        - ``http://server/plone/db/myform``
+        - ``http://server/plone/db/myform/view``
 
-OpenBareForm
-    ``http://server/portal/db/myform/OpenForm`` will render the form without
-    the Plone template.
+``OpenBareForm``
+    ``http://server/plone/db/myform/OpenBareForm`` will render the form
+    without the Plone template.
     It is useful when loading the form through an AJAX call, considering the
-    Plone skin is not needed in that case, and OpenBareForm will be more
+    Plone skin is not needed in that case, and ``OpenBareForm`` will be more
     performant.
 
-searchDocuments
+``searchDocuments``
     *Only for search forms.*
-    ``http://server/portal/db/myform/searchDocuments?field1=value1`` will
+    ``http://server/plone/db/myform/searchDocuments?field1=value1`` will
     search and display the search results according the parameters.
 
-tojson
-    ``http://server/portal/db/myform/tojson`` will return all the form fields
+``tojson``
+    ``http://server/plone/db/myform/tojson`` will return all the form fields
     as JSON.
-    ``http://server/portal/db/myform/tojson?item=field1`` will return the form
+    ``http://server/plone/db/myform/tojson?item=field1`` will return the form
     field ``field1`` as JSON.
-    
+
     .. Note:: the parameter is named ``item`` and not ``field`` in order to
-        expose the same signature as the document /tojson URL, so we do not
-        need to test the context in field formulas.
+        expose the same signature as the document ``/tojson`` URL, so we do
+        not need to test the context in field formulas.
 
 Document
 --------
 
-OpenDocument
-    ``http://server/portal/db/doc1/OpenDocument`` will render the document in
-    read mode.
+``OpenDocument``
+    ``http://server/plone/db/doc1/OpenDocument`` will render the document in
+    *read* mode.
+
     Equivalent to:
-        - ``http://server/portal/db/doc1``
-        - ``http://server/portal/db/doc1/view``
-    ``http://server/portal/db/doc1/OpenDocument?openwithform=form1`` will
-    render the document in read mode using the specified form.
+        - ``http://server/plone/db/doc1``
+        - ``http://server/plone/db/doc1/view``
+
+    ``http://server/plone/db/doc1/OpenDocument?openwithform=form1``
+    will render the document in read mode using the specified form.
     
-EditDocument
-    ``http://server/portal/db/doc1/EditDocument`` will render the document in
-    edit mode.
-    Equivalent to ``http://server/portal/db/doc1/edit``.
-    ``http://server/portal/db/doc1/EditDocument?openwithform=form1`` will
+``EditDocument``
+    ``http://server/plone/db/doc1/EditDocument`` will render the document in
+    *edit* mode.
+
+    Equivalent to ``http://server/plone/db/doc1/edit``.
+
+    ``http://server/plone/db/doc1/EditDocument?openwithform=form1`` will
     render the document in edit mode using the specified form.
 
-DocumentProperties
-    ``http://server/portal/db/doc1/DocumentProperties`` will show all the
+``DocumentProperties``
+    ``http://server/plone/db/doc1/DocumentProperties`` will show all the
     document information and stored items values.
 
-AccessControl
-    ``http://server/portal/db/doc1/AccessControl`` will show the current access
+``AccessControl``
+    ``http://server/plone/db/doc1/AccessControl`` will show the current access
     rights and roles in the context of the document.
 
-delete
-    ``http://server/portal/db/doc1/delete`` will delete the document.
-    ``http://server/portal/db/doc1/delete?returnurl=an_url`` will delete the
+``delete``
+    ``http://server/plone/db/doc1/delete`` will delete the document.
+    ``http://server/plone/db/doc1/delete?returnurl=an_url`` will delete the
     document and redirect to the specified URL.
 
-getfile
-    ``http://server/portal/db/doc1/getfile?filename=file1`` will download the
+    .. TODO:: This should use a ``POST``, not a ``GET``.
+
+``getfile``
+    ``http://server/plone/db/doc1/getfile?filename=file1`` will download the
     attached file ``file1``.
 
-deleteAttachment
-    ``http://server/portal/db/doc1/deleteAttachment?fieldname=field1&filename=file1``
+``deleteAttachment``
+    ``http://server/plone/db/doc1/deleteAttachment?fieldname=field1&filename=file1``
     will delete the attached file ``file1`` from the field ``field1``.
 
-tojson
-    ``http://server/portal/db/doc1/tojson`` will return all the document stored
+    .. TODO:: This should use a ``POST``, not a ``GET``.
+
+``tojson``
+    ``http://server/plone/db/doc1/tojson`` will return all the document stored
     items as JSON.
-    ``http://server/portal/db/doc1/tojson?item=item1`` will return the item
-    ``item1`` as JSON. It might be a non-stored item (Computed for display
-    field), and its value will be computed using the matching field from the
-    document's form.
-    ``http://server/portal/db/doc1/tojson?item=item1&formid=form1`` does the
+
+    ``http://server/plone/db/doc1/tojson?item=item1`` will return the item
+    ``item1`` as JSON. In the case of a non-stored item (e.g. a 
+    :guilabel:`Computed for display` field), its value will be computed
+    using the matching field from the document's form.
+
+    ``http://server/plone/db/doc1/tojson?item=item1&formid=form1`` does the
     same but the field is explicitly looked up from the ``form1`` form (which
     is not necessarily the document's form).
 
 Agent
 -----
 
-runAgent
-    ``http://server/portal/db/agent1/runAgent`` will execute the agent.
+``runAgent``
+    ``http://server/plone/db/agent1/runAgent`` will execute the agent.
 
-runAgent_async
-    *Requires plone.app.async.*
-    ``http://server/portal/db/agent1/runAgent`` will execute the agent in
+``runAgent_async``
+    *Requires ``plone.app.async``.*
+    ``http://server/plone/db/agent1/runAgent`` will execute the agent in
     asynchronous mode.
 
 Agents
@@ -1043,12 +1054,13 @@ and enter an identifier, a title and the code.
 This might be useful to run archiving, cleaning, etc. without giving
 manager rights to regular users.
 
-By default, an agent run using the current user access right, but it can also
+By default, an agent runs using the current user access right, but it can also
 run using the designer (the owner) access right. That way, a regular user might
-launch an action that normally requires higher privileges if he was doing it
+launch an action that would normally require higher privileges if he was doing it
 manually.
+
 For instance, if an agent is in charge of archiving documents by moving them
-from the current database to another one, if regular users does not have
+from the current database to another one, if regular users do not have
 access to the archive db, they would not be able to put some documents in that
 db. If the agent is executed as owner, it will not fail.
 
@@ -1058,7 +1070,7 @@ The agent can be executed (from an action) using the ``runAgent()`` method::
     db.MyAgent.runAgent()
 
 .. Note:: this method can take ``REQUEST`` as parameter (this has to be the
-    REQUEST object), which allows variables in the querystring to be read
+    REQUEST object), which allows variables in the query string to be read
     and redirection to be controlled (using a ``REDIRECT`` key on the
     request).
 
@@ -1070,8 +1082,8 @@ The agent can also be executed from Python formulas by calling it directly::
 .. Note:: this method can take optional positional arguments. It does not
     redirect.
 
-If you install plone.app.async on your Zope instance, an agent can also be
-executed in asynchronuous mode.
+If you install ``plone.app.async`` on your Zope instance, an agent can also be
+executed in asynchronous mode.
 
 Resources
 =========
@@ -1083,7 +1095,7 @@ contain useful extra assets:
 - CSS or javascript files; 
 - ZPT templates (see view template below); 
 - Python scripts, to provide a code library usable from the different
-  formulas (using the `callScriptMethod` method); 
+  formulas (using the ``callScriptMethod`` method); 
 - CSV (or other) files containing useful data; 
 - etc.
 
@@ -1101,18 +1113,18 @@ Plomino Element Portlet
 =======================
 
 A portlet displaying a Plomino form can be added anywhere in a Plone site.
-It can be useful to show informations, like statistics or charts (thanks to
+It can be useful to show information, like statistics or charts (thanks to
 Google Visualization, for example), computed when the page is displayed.
 
 .. Note::
 
     In Plone, when you add a portlet to a page, all of its children pages
     will contain it too. For example, if you add a portlet to the main page
-    of the site, it will be displayed in every pages of the site. You can
-    prevent this mechanism in a child page: click on :guilabel:`Manage
-    Portlets` in this page, find the selector next to the name of the
-    portlet (e.g. :guilabel:`Plomino element portlet`), and select
-    guilabel:`Block`.
+    of the site, it will be displayed in every page of the site. You can
+    prevent this mechanism in a child page: 
+    click on :guilabel:`Manage Portlets` in this page, find the selector
+    next to the name of the portlet 
+    (e.g. :guilabel:`Plomino element portlet`), and select guilabel:`Block`.
 
 You can add a portlet on a page with few steps:
 
@@ -1126,7 +1138,7 @@ A new page appears, with some fields:
 
 - The header field sets the title of the portlet.
 
-- The database path is the path of a Plomino database in the site, storing
+- The database path is the path of a Plomino database containing
   the form to be displayed. If the base is accessible at the URL
   ``http://example.org/Plone/database``, the path is ``/Plone/database``.
   Since there is always an exception to a rule, you have to be careful when
@@ -1140,7 +1152,7 @@ The new portlet is now displayed alongside the page.
 
 .. image:: images/element-portlet-display.png
 
-You can control if the portlet must be displayed or not by adding a field
+You can control whether the portlet must be displayed or not by adding a field
 named `Plomino_Portlet_Availability` which formula must return True or
 False.
 
@@ -1153,7 +1165,7 @@ Plomino provides a set of utility functions in ``PlominoUtils``
 In addition, custom Plomino utilities can be declared in a custom package,
 and they will be available from any Plomino formula.
 
-Example::
+Example:
 
 Create the utility methods in your extension module (e.g.
 ``mypackage.mymodule``)::
