@@ -508,7 +508,7 @@ Sub-forms
 An application can contain several forms.
 
 In the Book library example, we could add a CD form and a Video form.
-Those 2 forms would probably have several similar fields (availability,
+Those two forms would probably have several similar fields (availability,
 last borrower, return date, etc.).
 
 To avoid having to build (and maintain) the same things several times,
@@ -524,12 +524,22 @@ The form is inserted using the Plomino :guilabel:`Subform` style in Kupu:
 
 .. image:: images/m12bfc6b1.png
 
+Sub-forms can be inserted directly in the form layout using TinyMCE.
+
 .. Note:: 
     as you probably do not want ``borrowInfo`` to be displayed in the
     database home page, you have to check :guilabel:`Hide in menu` in the
     form :guilabel:`Parameters` tab.
 
-Sub-forms can be inserted directly in the form layout using TinyMCE.
+.. Note::
+
+    Some fields type are computed independently of rendering, namely
+    ``COMPUTED``, ``COMPUTEDONSAVE`` and ``CREATION``. In the case of
+    sub-forms, if multiple sub-forms have fields with the same id as the
+    including form, or other included forms, those fields will be found
+    multiple times. Plomino handles this case by picking the first
+    occurrence of the field, and logging the ambiguity (at the ``WARNING``
+    log level).
 
 Search formula
 --------------
