@@ -28,8 +28,8 @@ A Plomino application or database is a single container which holds
 has a catalog, a ``documents`` container for all documents, and a
 ``resources`` container for script libraries. That's it. 
 
-A closer look 
-==============
+A closer look
+=============
 
 *Forms* contain *Fields* and *Actions*, and *Views* contain *Columns* and
 *Actions*. 
@@ -99,7 +99,7 @@ wanted to mimic containment, but this is only one possible way of
 structuring your data.
 
 Grouping documents
-===================
+==================
 
 Forms are built around individual Documents. For dealing with Documents in
 aggregate, Plomino offers :ref:`Views <view>`. The documents in a view are
@@ -122,7 +122,7 @@ is, a view that lists books for lending could show documents using a
 could use the *CatalogBook* form).
 
 Security 
-==========
+========
 
 - All the normal Plone roles and permissions pertain to Plomino. 
 - In addition, Plomino offers a hierarchy of roles that govern management of
@@ -177,7 +177,7 @@ This is a powerful motivation of the "dirty" mixing of content and code
 in the database.
 
 Workflow 
-==========
+========
 
 One way of addressing workflow needs in Plomino is to create a script
 library which computes the form which should be used based on the context
@@ -190,7 +190,8 @@ ideal.
 Use cases 
 =========
 
-Use cases: 
+Use cases:
+
 - simple form-based data capture.
 - mini-apps that manipulate Plone content.
 - selfcontained apps.
@@ -262,12 +263,14 @@ Application export and versioning
 ----------------------------------
 
 Some of the drawbacks of old-style through-the-web coding in Zope include:
+
 - it's hard to distinguish between application and data;
 - it's easy to lose track of application elements among nested folders with
   acquisition in play;
 - it's hard to version the application. 
 
 These are mitigated in Plomino in various ways:
+
 - A Plomino application consists of a single container with design elements
   (forms, views, agents), and a ``resources`` subfolder with scripts,
   templates, images, and other collateral.
@@ -301,6 +304,7 @@ Caveats
 --------
 
 A quick list of ways to make life difficult for yourself:
+
 - Change the field type after you already have documents with items of the
   original type (e.g. you used to be creating strings, but now you're
   creating dates).
