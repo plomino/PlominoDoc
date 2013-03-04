@@ -128,10 +128,12 @@ Then select the action type:
   document with this new value, etc. If the formula returns a string,
   Plomino will assume it is a URL and use it for redirection.
 
-- :guilabel:`Redirect`: same as ``Python script``, but the formula should
-  return an URL that will be used for redirection. Example: create a new
-  document using some values from the current document, and automatically
-  open this new document.
+- :guilabel:`Redirect`: similar to ``Python script``, but the formula is 
+  executed *before* the document is rendered, not when the button or link is
+  clicked. The script should return an URL which is used as a link or button
+  target. By including URL parameters in the returned URL, it can be used to
+  links to a form with fields pre-filled.  A better name for this action type
+  may be *Computed link*.
 
 You can add a :term:`hide-when` formula to control when the action should be
 visible or not.
