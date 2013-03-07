@@ -9,7 +9,7 @@ Formulas are Python scripts. Example::
 
     return plominoDocument.getItem('price') * 15
 
-return the value of the ``price`` item multiplied by 15.
+returns the value of the ``price`` item multiplied by 15.
 
 If the ``price`` item doesn't exist, ``getItem`` will return ``None``, and
 the formula will raise an exception. The exception is swallowed and the
@@ -36,7 +36,13 @@ or a :term:`form`, for instance).
     Technically, ``plominoDocument`` and ``plominoContext`` are just targeting
     the very same object, which is the Zope ``context``.  ``plominoDocument``,
     ``plominoContext``, ``context`` can be used identically.
-     
+
+Besides these names, many functions defined in ``PlominoUtils`` are 
+available within the context of a formula. In addition, Plomino sets 
+the ``plomino_form_ids`` key on the ``REQUEST``, which contains a list
+cumulative list of all the forms rendered, with the most recent form last.
+This allows fields on subforms to figure out what form they were rendered from.
+
 Document items should be accessed using the ``getItem()`` method:
 ``plominoDocument.getItem('validationDate')``. 
 
