@@ -1159,7 +1159,7 @@ would be rendered as::
     6 horas
     6 heures
 
-If the text does not match any msgid from the i18n domain, it is remained
+If the text does not match any msgid from the i18n domain, it remains
 unchanged (but without the enclosing __).
 
 The translation mechanism can be called from a formula using the ``translate``
