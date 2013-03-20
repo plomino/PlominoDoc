@@ -15,6 +15,7 @@ id
         corresponding document item.
 Field type
     :Value:
+        - Boolean
         - Datagrid
         - Date/Time
         - Doclink
@@ -182,6 +183,13 @@ Size
         - If "Long text": textarea rows.
 
 .. image:: images/m1f045a32.png
+
+Boolean field
+-------------
+
+No specific parameters.
+
+Displays as a checkbox, and stores True or False.
 
 Selection list field
 --------------------

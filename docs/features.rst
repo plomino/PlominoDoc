@@ -450,8 +450,13 @@ In a Plomino form, you can use the following events:
     opening fails, and the value is displayed as an error
     message.
 
+``beforeSaveDocument``
+    executed before submitted values are stored into the document. Submitted
+    values can be found in ``context.REQUEST``.
+
 ``onSaveDocument``
-    executed before document is saved
+    executed after editable and computed items have been stored, and before
+    document is re-indexed.
 
 ``onDeleteDocument``
     executed before document is deleted
@@ -1122,10 +1127,109 @@ To access this folder, go to the :guilabel:`Design` tab, expand the
 opens the standard :term:`ZMI` screen, which allows new elements to be
 added.
 
+i18n support
+============
+
+By declaring an i18n domain in the database parameters, Plomino translation 
+will be enabled.
+
+When enabled, any text enclosed by __ will be translated according the defined
+i18n domain.
+
+It will apply to form layout static content::
+
+    __What time is it?__
+
+would be rendered as::
+
+    What time is it?
+    ¿qué hora es?
+    Quelle heure est-il ?
+
+(assuming you have an i18n domain containing the msgid "What time is it?"
+and providing the desired languages)
+
+But it will also apply to any computed field output as well::
+
+    return context.getItem('the_hour')+" __hours__"
+
+would be rendered as::
+
+    6 hours
+    6 horas
+    6 heures
+
+If the text does not match any msgid from the i18n domain, it is remained
+unchanged (but without the enclosing __).
+
+The translation mechanism can be called from a formula using the ``translate``
+function provided by PlominoUtils, which can be handy in agents or view columns.
+
 Caching
 =======
 
-.. todo:: TO BE DONE. Explain setCache/getCache and setRequestCache
+RAM cache
+---------
+
+If your Plomino application contains some time consumming formulas, you can
+speed up the page display by keeping the result in RAM cache using `getCache`
+and `setCache`.
+
+Here is an example::
+    result = db.getCache('my_cache_key')
+    if not result:
+        result = make_something_which_cost_CPU(stuff)
+        db.setCache('my_cache_key', result)
+    return result
+
+The first time the formula will be called, the make_something_which_cost_CPU
+function will executed, and the result will be put into the cache.
+
+Next time the formula is called, the result is directly read from the cache.
+
+As the cache key is a constant ('my_cache_key'), it will be the same in all the
+cases (for all the users, in all the pages, etc.).
+
+But of course, the make_something_which_cost_CPU function might return a
+different value depending on the context. If so, you need the produce a cache
+key that will reflect this context accurately.
+
+For instance, if the result is different according the user, an accurate cache
+key could be::
+
+    cache_key = "result_for_"+context.getCurrentUser().getMemberId()
+
+or depending on the document::
+
+    cache_key = "result_for_"+context.id
+
+or anything you might need.
+
+Request cache
+-------------
+
+Another use case is the repeated usage of a same formula in the same page:
+sometimes, when rendering a document using a form, several computed fields make
+the same computing (typical example: you display a table of values, and also a
+bar chart based on those values).
+
+The code itself can be factorized using a script library in the /resources
+folder, but it will be run twice anyway when rendering the page.
+
+And it might impact the performances.
+
+Unfortunately, `setCache` and `getCache` might not be relevant because you want
+the formula to be re-evaluated everytime a user displays the page. In that
+case, you can use `setRequestCache` and `getRequestCache`, so the cache will be
+associated with the current request, and will only last as long as the request
+will::
+
+    result = db.getRequestCache('my_cache_key')
+    if not result:
+        result = make_something_which_cost_CPU(stuff)
+        db.setRequestCache('my_cache_key', result)
+    return result
+
 
 Plomino Element Portlet
 =======================

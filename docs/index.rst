@@ -1,5 +1,5 @@
 =======================
-Plomino 1.15 user guide
+Plomino 1.17 user guide
 =======================
 
 :Author: Eric Brehault <eric.brehault@makina-corpus.com>
