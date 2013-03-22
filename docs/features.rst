@@ -1171,33 +1171,35 @@ Caching
 RAM cache
 ---------
 
-If your Plomino application contains some time consumming formulas, you can
-speed up the page display by keeping the result in RAM cache using `getCache`
-and `setCache`.
+If your Plomino application contains some time consuming formulas, you can
+speed up the page display by keeping the result in RAM cache using
+``getCache`` and ``setCache``.
 
 Here is an example::
+
     result = db.getCache('my_cache_key')
     if not result:
         result = make_something_which_cost_CPU(stuff)
         db.setCache('my_cache_key', result)
     return result
 
-The first time the formula will be called, the make_something_which_cost_CPU
-function will executed, and the result will be put into the cache.
+The first time the formula will be called, the
+``make_something_which_cost_CPU`` will be executed, and the result
+will be put into the cache.
 
 Next time the formula is called, the result is directly read from the cache.
 
-As the cache key is a constant ('my_cache_key'), it will be the same in all the
-cases (for all the users, in all the pages, etc.).
+As the cache key is a constant (``my_cache_key``), it will be the same in
+all the cases (for all the users, in all the pages, etc.).
 
-But of course, the make_something_which_cost_CPU function might return a
-different value depending on the context. If so, you need the produce a cache
+But of course, the ``make_something_which_cost_CPU`` function might return a
+different value depending on the context. If so, you need to produce a cache
 key that will reflect this context accurately.
 
-For instance, if the result is different according the user, an accurate cache
-key could be::
+For instance, if the result is different according the user, an accurate
+cache key could be::
 
-    cache_key = "result_for_"+context.getCurrentUser().getMemberId()
+    cache_key = "result_for_"+context.getCurrentUserId()
 
 or depending on the document::
 
@@ -1209,20 +1211,20 @@ Request cache
 -------------
 
 Another use case is the repeated usage of a same formula in the same page:
-sometimes, when rendering a document using a form, several computed fields make
-the same computing (typical example: you display a table of values, and also a
-bar chart based on those values).
+sometimes, when rendering a document using a form, several computed fields
+make the same computation (typical example: you display a table of values,
+and also a bar chart based on those values).
 
-The code itself can be factorized using a script library in the /resources
-folder, but it will be run twice anyway when rendering the page.
+The code itself can be factorized using a script library in the
+``/resources`` folder, but it will be run twice anyway when rendering the
+page, and this might impact performance.
 
-And it might impact the performances.
-
-Unfortunately, `setCache` and `getCache` might not be relevant because you want
-the formula to be re-evaluated everytime a user displays the page. In that
-case, you can use `setRequestCache` and `getRequestCache`, so the cache will be
-associated with the current request, and will only last as long as the request
-will::
+Unfortunately, ``setCache`` and ``getCache`` might not be relevant because
+you want the formula to be re-evaluated every time a user displays the page.
+In that case, you can use ``setRequestCache`` and ``getRequestCache``, so
+the cache will be
+associated with the current request, and will only last as long as the
+request::
 
     result = db.getRequestCache('my_cache_key')
     if not result:
