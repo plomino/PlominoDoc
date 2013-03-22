@@ -37,8 +37,8 @@ PlominoDatabase
     Returns catalog brains for all the PlominoDocument objects stored in
     the database.
 
-``getCurrentUser(self)``
-    Returns the current user.
+``getCurrentMember(self)``
+    Returns the current Plone member.
 
 ``getCurrentUserRights(self)``
     Returns the current user's access rights.

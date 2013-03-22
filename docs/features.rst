@@ -66,8 +66,8 @@ You can also access the views and the other documents. Example::
 You can check the current user rights or roles. Example::
 
     db = plominoDocument.getParentDatabase() 
-    user = db.getCurrentUser() 
-    if db.hasUserRole(user.id, '[Expert]'): 
+    member = db.getCurrentMember() 
+    if db.hasUserRole(member.id, '[Expert]'): 
         return True 
     elif db.isCurrentUserAuthor(doc): 
         return True 
@@ -476,11 +476,11 @@ Example: enter the following formula for the ``onSaveDocument`` event::
 
     date = DateToString(DateTime()) 
     db = plominoDocument.getParentDatabase() 
-    user = userFullname(db, db.getCurrentUser()) 
+    user_name = userFullname(db, db.getCurrentMember()) 
     plominoDocument.setItem(
         'history',
         plominoDocument.getItem('history') +
-        "This document has been modified by "+user+" on "+date)
+        "This document has been modified by "+user_name+" on "+date)
 
 It will update the ``history`` item which logs all the modifications,
 authors and dates.
@@ -690,7 +690,7 @@ the same cached fragment will be served to all the users in all the cases.
 
 If you use a formula which depends on the current user, like::
 
-    "personal-report-" + context.getCurrentUser().getMemberId()
+    "personal-report-" + context.getCurrentUserId()
 
 then there will be a different cached fragment for each user (so if the same
 user displays the form twice, he will received the cached content the second

@@ -107,7 +107,7 @@ the document:
 - create a field named ``creator`` (for instance). It should be of type
   ``Name`` and mode ``Computed on creation``, with the following formula::
 
-    plominoDocument.getCurrentUser().getMemberId()
+    plominoDocument.getCurrentUserId()
 
   This will store the user id of the user who creates the document (it might
   be dangerous to use the ``Plomino_Authors`` item on the document, as its
@@ -123,7 +123,7 @@ the document:
 
   Here's an example formula::
 
-    member_id = plominoDocument.getCurrentUser().getMemberId()
+    member_id = plominoDocument.getCurrentUserId()
     if member_id == plominoDocument.getItem('creator'):
         return None
 
