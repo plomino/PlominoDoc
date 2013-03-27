@@ -286,6 +286,11 @@ Starting year
 
           If empty, default to the Plone site default starting year.
 
+.. note:: The calendar widget for selection of dates requires the 
+    ``calendar_formfield.js`` script to function. By default, this is
+    not loaded for Anonymous users, so if you want to show a date 
+    selection widget to Anonymous, be sure to allow this script at 
+    ``portal_javascripts`` in the ZMI.
 
 File attachment field
 ---------------------
