@@ -169,13 +169,19 @@ tab:
 Text field
 ----------
 
+A text field allows simple text input. 
+
+Text fields can also be rendered *hidden*. In this case, input comes from
+the REQUEST. 
+
 .. image:: images/3fdf9792.png
 
 Widget
     :Value:
         - ``Text``
         - ``Long text``
-    :Purpose: Text is rendered as a basic HTML input text field.
+        - ``Hidden``
+    :Purpose: Text is rendered as a basic HTML input text field, or a hidden field.
 Size
     :Value: Integer
     :Purpose:
