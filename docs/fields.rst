@@ -261,10 +261,14 @@ Number field
 
 .. image:: images/m22b77a8c.png
 
+*Decimal* numbers can be represented exactly, unlike floats.  Zero is zero,
+not something like ``5.5511151231257827e-017``.
+
 Type
     :Value:
         - ``Integer``
         - ``Float``
+        - ``Decimal``
 Size
     :Value:
         Integer
