@@ -13,18 +13,13 @@ Deploy Plomino in your Plone site
 ---------------------------------
 
 To deploy the Plomino product, you need to edit your ``buildout.cfg`` file
-and add the following in the ``eggs`` and ``zcml`` sections:
+and add the following in the ``eggs`` section:
 
 .. code-block:: ini
 
     eggs =
          ...
          Products.CMFPlomino
-         plomino.tinymce
-         
-    zcml =
-         ...
-         plomino.tinymce
 
 Then you have to run ``buildout`` to realize your configuration:
 
