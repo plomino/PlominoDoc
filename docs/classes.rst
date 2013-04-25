@@ -90,6 +90,9 @@ PlominoDatabase
 ``hasUserRole(self, userid, role)``
     Returns ``True`` if the specified user id has the given role.
 
+``processImportAPI(self, formName, separator, fileToImport, file_encoding='utf-8')``
+    Import a CSV file to create document using the specified form.
+
 ``isCurrentUserAuthor(self, doc)``
     returns ``True`` if the current user is author of the given document
     or has the PlominoAuthor right.
