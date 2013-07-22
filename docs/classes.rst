@@ -296,14 +296,15 @@ PlominoUtils
 ``DateRange(d1, d2)``
     returns the dates of all the days between the 2 dates.
 
-``DateToString(d, format='%d/%m/%Y')``
-    converts a date to a string.
+``DateToString(d, format=None, db=None)``
+    Converts a date to a string. If ``db`` is passed, use the database 
+    date format.
 
 ``htmlencode(s)``
-    replaces unicode characters with their corresponding html entities
+    Replaces unicode characters with their corresponding HTML entities.
 
 ``isDocument(object)``
-    Test if the object is a PlominoDocument.
+    Test if the object is a ``PlominoDocument``.
     Useful to distinguish a document context from a form context.
 
 ``json_dumps(obj)``
@@ -335,21 +336,22 @@ PlominoUtils
     Send a mail to the recipients.
     If sender is None, it will use the current user mail address.
 
-``StringToDate(str_d, format='%d/%m/%Y')``
-    converts a string to a date.
+``StringToDate(str_d, format='%Y-%m-%d', db=None)``
+    Converts a string to a date.  If ``db`` is passed, use the database date
+    format.  If ``format=None``, guess. 
 
 ``PlominoTranslate(msgid, context, domain='CMFPlomino')``
     Look up the translation for ``msgid`` in the current language.
 
 ``urlencode(h)``
-    Convert a dictionary into a URL querystring (a key=value& string).
+    Convert a dictionary into a URL querystring (a ``key=value&`` string).
     Example::
     
         >>> urlencode({"option": 5, "article": "9879879"})
         'article=9879879&option=5'
 
 ``urlquote(string)``
-    Replace special characters in string using the %xx escape.
+    Replace special characters in a string using the ``%xx`` escape.
     Example::
     
         >>> urlquote('runAgent?REDIRECT=True&action=accept')
