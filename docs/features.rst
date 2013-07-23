@@ -433,9 +433,39 @@ So, for example, if you want to pass a parameter to another form:
   whatever)
   fields which use the value of this field.
 
+Field labels
+------------
+
+Form layouts may contain field labels. See `field labels`_ below.
+
 
 Forms
 =====
+
+Field labels
+------------
+
+A field label corresponds to a field. 
+To create a label, add text with the format ``fieldid: Label`` 
+or just ``fieldid`` to the layout, select this text,
+and select the *Plomino Label* style from the TinyMCE styles dropdown.
+
+The ``fieldid`` has to correspond to a field in the layout. 
+
+If no label is specified (i.e. ``fieldid``), the field title is used as the label.
+
+Labels for single-input fields are rendered as an HTML 
+``<label for='FIELDID'>LABEL</label>`` element.
+
+Labels for composite fields such as checkboxes, radio buttons,
+and picklists are rendered as a 
+``<fieldset><legend>LABEL</legend>...</fieldset>`` structure, 
+wrapping the target field.
+Note that ``label`` elements are rendered in-place 
+(which may be anywhere in the layout), 
+while ``fieldset`` elements are rendered around the target field.
+
+Labels and legends are rendered only in **edit** mode.
 
 Events
 ------
