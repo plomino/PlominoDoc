@@ -442,6 +442,23 @@ Form layouts may contain field labels. See `field labels`_ below.
 Forms
 =====
 
+Document id and title formulas
+------------------------------
+
+:guilabel:`Document title formula`
+  Compute the document title
+
+:guilabel:`Compute document title on view`
+  Execute the document title formula whenever the document is rendered
+
+:guilabel:`Store dynamically computed title`
+  Store the computed title (if different from the stored value) every time
+  the document is rendered. (Watch out, this can become a hotspot if it 
+  causes many writes.)
+
+:guilabel:`Document id formula`
+  Compute the document id at creation. (Undergoes normalization.)
+
 Field labels
 ------------
 
@@ -703,31 +720,33 @@ Caching
 -------
 
 To improve performances, it might be useful to cache some fragments of a form
-so they are not re-computed everytime.
+so they are not re-computed every time.
+
 Cached fragments are set in the layout the same way as hide-when formulas, with
 ``start:cache-identifier`` and ``end:cache-identifier`` markers.
 The associated formula is supposed to return a cache key.
+
 When the form is rendered the first time, the resulting HTML contained into the
 delimited area will be stored in cache and associated with the cache key.
-Everytime the form will be rendered a new time, if the cache key returned by
+Every time the form is rendered, if the cache key returned by
 the formula matched an existing cache key, the cached HTML is returned.
 
-Consequently, if you use a formula returning always the same value, like::
+Consequently, if you use a formula returning always the same value, e.g.::
 
     "financial-report"
 
 the same cached fragment will be served to all the users in all the cases.
 
-If you use a formula which depends on the current user, like::
+If you use a formula which depends on the current user, e.g.::
 
     "personal-report-" + context.getCurrentUserId()
 
 then there will be a different cached fragment for each user (so if the same
-user displays the form twice, he will received the cached content the second
+user displays the form twice, she will received the cached content the second
 time, but other users would not get that cached fragment, they would get their
 own cache).
 
-The formula might depends on the date::
+The formula might depend on the date::
 
      "today-report-" + DateToString(Now(), "%Y-%m-%d")
 
