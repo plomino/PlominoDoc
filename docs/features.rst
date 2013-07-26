@@ -215,6 +215,9 @@ and insert it in the ``frmBook`` form:
 
 .. image:: images/m434a6b5d.png 
 
+A :guilabel:`Computed for display` field with *no* formula specified
+will render the item with the corresponding id, if it exists.
+
 .. Note:: If your computed field A depends on computed field B, the formula
     for A needs to compute B first. This will result in B being computed
     twice, so consider caching if needed. 
