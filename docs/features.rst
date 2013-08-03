@@ -474,18 +474,25 @@ The ``fieldid`` has to correspond to a field in the layout.
 
 If no label is specified (i.e. ``fieldid``), the field title is used as the label.
 
-Labels for single-input fields are rendered as an HTML 
+In *edit* mode, labels for single-input fields are rendered as an HTML 
 ``<label for='FIELDID'>LABEL</label>`` element.
 
-Labels for composite fields such as checkboxes, radio buttons,
+In *read* mode, labels for single-input fields are rendered as an HTML 
+``<span class='label' title='Label for FIELDID'>LABEL</span>`` element.
+
+In *edit* mode, labels for composite fields such as checkboxes, radio buttons,
 and picklists are rendered as a 
 ``<fieldset><legend>LABEL</legend>...</fieldset>`` structure, 
 wrapping the target field.
+
+In *read* mode, labels for composite fields are rendered as a 
+``<div class='fieldset'><span class='legend' title='Legend for FIELDID'>LABEL</span>...</div>``
+structure.
+
 Note that ``label`` elements are rendered in-place 
 (which may be anywhere in the layout), 
 while ``fieldset`` elements are rendered around the target field.
 
-Labels and legends are rendered only in **edit** mode.
 
 Events
 ------
