@@ -215,6 +215,9 @@ and insert it in the ``frmBook`` form:
 
 .. image:: images/m434a6b5d.png 
 
+A :guilabel:`Computed for display` field with *no* formula specified
+will render the item with the corresponding id, if it exists.
+
 .. Note:: If your computed field A depends on computed field B, the formula
     for A needs to compute B first. This will result in B being computed
     twice, so consider caching if needed. 
@@ -433,9 +436,63 @@ So, for example, if you want to pass a parameter to another form:
   whatever)
   fields which use the value of this field.
 
+Field labels
+------------
+
+Form layouts may contain field labels. See `field labels`_ below.
+
 
 Forms
 =====
+
+Document id and title formulas
+------------------------------
+
+:guilabel:`Document title formula`
+  Compute the document title
+
+:guilabel:`Compute document title on view`
+  Execute the document title formula whenever the document is rendered
+
+:guilabel:`Store dynamically computed title`
+  Store the computed title (if different from the stored value) every time
+  the document is rendered. (Watch out, this can become a hotspot if it 
+  causes many writes.)
+
+:guilabel:`Document id formula`
+  Compute the document id at creation. (Undergoes normalization.)
+
+Field labels
+------------
+
+A field label corresponds to a field. 
+To create a label, add text with the format ``fieldid: Label`` 
+or just ``fieldid`` to the layout, select this text,
+and select the *Plomino Label* style from the TinyMCE styles dropdown.
+
+The ``fieldid`` has to correspond to a field in the layout. 
+
+If no label is specified (i.e. ``fieldid``), the field title is used as the label.
+
+In *edit* mode, labels for single-input fields are rendered as an HTML 
+``<label for='FIELDID'>LABEL</label>`` element.
+
+In *read* mode, labels for single-input fields are rendered as an HTML 
+``<span class='label' title='Label for FIELDID'>LABEL</span>`` element.
+
+In *edit* mode, labels for composite fields such as checkboxes, radio buttons,
+and picklists are rendered as a 
+``<fieldset><legend>LABEL</legend>...</fieldset>`` structure, 
+wrapping the target field.
+
+In *read* mode, labels for composite fields are rendered as a 
+``<div class='fieldset'><span class='legend' title='Legend for FIELDID'>LABEL</span>...</div>``
+structure.
+
+Note that ``label`` elements are rendered in-place 
+(which may be anywhere in the layout), 
+while ``fieldset`` elements are rendered around the target field.
+
 
 Events
 ------
@@ -673,31 +730,33 @@ Caching
 -------
 
 To improve performances, it might be useful to cache some fragments of a form
-so they are not re-computed everytime.
+so they are not re-computed every time.
+
 Cached fragments are set in the layout the same way as hide-when formulas, with
 ``start:cache-identifier`` and ``end:cache-identifier`` markers.
 The associated formula is supposed to return a cache key.
+
 When the form is rendered the first time, the resulting HTML contained into the
 delimited area will be stored in cache and associated with the cache key.
-Everytime the form will be rendered a new time, if the cache key returned by
+Every time the form is rendered, if the cache key returned by
 the formula matched an existing cache key, the cached HTML is returned.
 
-Consequently, if you use a formula returning always the same value, like::
+Consequently, if you use a formula returning always the same value, e.g.::
 
     "financial-report"
 
 the same cached fragment will be served to all the users in all the cases.
 
-If you use a formula which depends on the current user, like::
+If you use a formula which depends on the current user, e.g.::
 
     "personal-report-" + context.getCurrentUserId()
 
 then there will be a different cached fragment for each user (so if the same
-user displays the form twice, he will received the cached content the second
+user displays the form twice, she will received the cached content the second
 time, but other users would not get that cached fragment, they would get their
 own cache).
 
-The formula might depends on the date::
+The formula might depend on the date::
 
      "today-report-" + DateToString(Now(), "%Y-%m-%d")
 
