@@ -294,8 +294,8 @@ PlominoUtils
     returns the dates of all the days between the 2 dates.
 
 ``DateToString(d, format=None, db=None)``
-    Converts a date to a string. If ``db`` is passed, use the database 
-    date format.
+    Converts a date to a string. If the database object is passed for the
+    ``db`` parameter, use the database date format.
 
 ``htmlencode(s)``
     Replaces unicode characters with their corresponding HTML entities.
