@@ -616,7 +616,7 @@ Search formula
 
 When you create a search form, Plomino uses the form fields to do a
 default ZCatalog search among the documents of the view associated with 
-the search page.
+the search page. (But see `Search event`_ below.)
 
 If needed, you can create a specific search formula in the form
 :guilabel:`Parameters` tab.
