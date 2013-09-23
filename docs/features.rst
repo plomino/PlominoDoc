@@ -778,7 +778,7 @@ Views
 Form formula
 ------------
 
-You may need to read or edit documents with different forms.
+You may need to read or edit documents using different forms.
 
 For instance, a person who wants to borrow a book wants different
 information (book description, category, publication year, etc.) than
