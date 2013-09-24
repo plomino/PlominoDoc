@@ -86,11 +86,49 @@ stored in the documents.
 
 .. _column:
 
+A Plomino *view* is like a canned search. Views are built up incrementally, 
+and not assembled dynamically as would be the case for a catalog query. 
+Every time a document is saved, view formulas are evaluated, and if any of
+them return ``True``, the document is included in the view.
+
+This has two implications:
+
+- While it is cheap to keep the view up to date incrementally, it can be
+  expensive to rebuild views from scratch, as this involves evaluating view
+  formulas over all documents in the database.
+
+- A document needs to be saved in order for its state to be reflected in views.
+  I.e. a simple ``setItem`` is not enough. 
+
+Views store columns as catalog metadata. This effectively doubles the storage
+required for any field when it is added as a view column. It trades space for
+speed: the last-saved value of an expensive computed field can be obtained from
+the view column without having to execute the field formula again (but watch
+out for stale values, if the state or context of the document has changed since
+the last save).
+
+
 Columns
 -------
 
-A :dfn:`column` defines one column of a view. Each column formula is
-computed for each document in the view, and may look up data from anywhere
-in the database. 
+Views can contain columns. The column values are stored and displayed (unless
+hidden) for every record that forms part of the view. A :dfn:`column` may refer
+to a form field, in which case that field will be used to render the record
+value, or it may specify a **column formula**, which need not correspond to one
+or any field. 
+
+Column totals
+`````````````
+
+Numerical columns can be added up to display column totals (the total for all
+the records in the view). If the column refers to a field, that field will 
+also be used to render the total.
+
+If desired, column totals can be dynamically computed in the browser per 
+view batch. In order to enable this, include the following snippet in the
+View's :guilabel:`Dynamic Table Parameters`::
+
+    'fnFooterCallback': generateTableFooter,
+
 
 .. |---| unicode:: U+02014 .. em dash
