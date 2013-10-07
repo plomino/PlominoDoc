@@ -28,6 +28,14 @@ A Plomino application or database is a single container which holds
 has a catalog, a ``documents`` container for all documents, and a
 ``resources`` container for script libraries. That's it. 
 
+Positioning
+===========
+
+Plomino is a **throught-the-web application builder**, hence:
+
+* it is **not a throught-the-web content-type builder** like `Dexterity <http://plone.org/products/dexterity>`_, which is perfect to create a custom content type but that will always stick to the standard content management scenario, while Plomino allows to implement any custom scenarios,
+* it is **not just a form generator** like `PloneFormGen <http://plone.org/products/ploneformgen>`_, as Plomino provides all the services (data storage, search, automation, import/export, etc.) to build an entire application. And regarding form generation itself, a major difference with PloneFormGen is that Plomino allows to edit the form layout entirely, while PloneFormGen use a fixed pre-defined form layout.
+
 A closer look
 =============
 
