@@ -793,6 +793,18 @@ If the cache key is ``None``, caching is not applied, so for instance::
 would show the cached content in read mode, but would always regenerate
 the content in edit mode.
 
+Specific CSS or JS
+------------------
+
+If a form needs some specific CSS or JS, they can be mentionned in the form edit
+page in the 2 respective textarea fields (one URL by line).
+
+Those URLs can target:
+
+- an file provided in the theme but not enabled in portal_javascript,
+- a file contained in the Plomino database resources folder,
+- an external file (most likely a CDN URL).
+
 Views
 =====
 
