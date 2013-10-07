@@ -436,10 +436,31 @@ So, for example, if you want to pass a parameter to another form:
   whatever)
   fields which use the value of this field.
 
+
 Field labels
 ------------
 
 Form layouts may contain field labels. See `field labels`_ below.
+
+
+HTML attributes injection
+-------------------------
+
+The HTML attributes formula parameter allows to enter a formula in charge of
+returning a string that will be injected in the field tag element.
+
+A typical example could be::
+
+    'placeholder="Enter the book title here"'
+
+But it also be a good way to enable Mockup pattern-based widgets::
+
+    'class="pat-select2" data-pat-select2="width:20em"'
+
+or basically any HTML attributes a Javascript library or a CSS grid might
+expect.
+
+.. Note:: the attributes are inserted just before 'id="field_id"' if it exists.
 
 
 Forms
