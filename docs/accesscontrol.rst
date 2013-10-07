@@ -21,6 +21,8 @@ Plomino offers 5 standard access levels for any Plomino database:
 
 These rights can be granted to Plone members and/or to Plone groups.
 
+.. Note:: in reality, Designer users can change the formulas, but we just make sure their editing is disabled, so it is not a security restriction, it is just a UI behaviour useful to make unexperimented users can easily modify a form layout without breaking the Python code in the different formuals.
+
 Generic users
 =============
 
