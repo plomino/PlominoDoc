@@ -15,9 +15,9 @@ Plomino offers 5 standard access levels for any Plomino database:
 
 - *Editor*: Author + can modify/delete any documents.
 
-- *Designer*: Editor + can change the database design.
+- *Designer*: Editor + can change the database design but formulas.
 
-- *Manager*: Designer + can change the access rights.
+- *Manager*: Designer + can change formulas + can change the access rights.
 
 These rights can be granted to Plone members and/or to Plone groups.
 
