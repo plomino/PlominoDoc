@@ -326,7 +326,21 @@ PlominoUtils
     returns current date and time as a DateTime object.
 
 ``open_url(url, asFile=False)``
-    Retrieve content from ``url``
+    By default, it raises an Unauthorized exception.
+    If the requested domain (note: it might also be a local path) has been
+    declared safe by an local module, it retrieves the content from ``url``.
+    To declare a domain as safe::
+
+        from zope.interface import implements
+        from Products.CMFPlomino.interfaces import IPlominoSafeDomains
+        
+        class PlominoSafeDomains:
+            implements(IPlominoSafeDomains)
+            
+            domains = [
+              "http://api.geonames.org",
+              "/var/public"
+            ]
 
 ``PlominoTranslate(message, context, domain='CMFPlomino')``
     translate the given message using the Plone i18n engine (using the
