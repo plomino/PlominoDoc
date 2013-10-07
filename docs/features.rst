@@ -895,6 +895,23 @@ export from the local database to the remote one.
 The principle is the same, you just need to use the :guilabel:`Export`
 section.
 
+Import/export from a GenericSetup profile
+-----------------------------------------
+
+Plomino provides a GenericSetup export step able to export all databases marked
+as templates into a GenericSetip profile.
+When such a profile is imported, the registered database templates can be used
+to initialize any new db with a ready-to-use design.
+
+Step by step procedure:
+
+- for each database you want to provide as template, go to its Parameters page, and enable "Use as a template",
+- go to your Plone portal ZMI / portal_setup / Export page,
+- select the "Export Plomino templates" step, and click "Export selected steps", it produces a .tar.gz file,
+- go to the Plone site where you want to provide those db templates,
+- go to its ZMI / portal_setup / Import page, and at the bottom, import the previously downloaded .tar.gz file,
+- now create a new Plomino database in your site, the default welcome page will provide a list of the available templates, so you can pick one and get its design immediately import in your database.
+- the template selection is also available in the Database design tab.
 
 Replication
 -----------
