@@ -244,9 +244,9 @@ You can also add more validation criteria in the field's
 
 For instance, in a *Purchase request* application, the maximum authorised
 amount is 1000 euros. You would enter the following formula in the
-``TotalAmount`` field::
+``TotalAmount`` validation field::
 
-    if plominoDocument.TotalAmount>1000: 
+    if plominoDocument.getItem('TotalAmount') >= 1000: 
         return 'The total amount must be under 1000 euros' 
     else: 
         return ''
