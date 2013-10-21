@@ -332,15 +332,17 @@ PlominoUtils
     To declare a domain as safe::
 
         from zope.interface import implements
+        frim zope.component import provideUtility
         from Products.CMFPlomino.interfaces import IPlominoSafeDomains
         
-        class PlominoSafeDomains:
+        class MySafeDomains:
             implements(IPlominoSafeDomains)
             
             domains = [
               "http://api.geonames.org",
               "/var/public"
             ]
+        provideUtility(MySafeDomains, IPlominoSafeDomains)
 
 ``PlominoTranslate(message, context, domain='CMFPlomino')``
     translate the given message using the Plone i18n engine (using the
