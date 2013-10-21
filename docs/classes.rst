@@ -332,7 +332,7 @@ PlominoUtils
     To declare a domain as safe::
 
         from zope.interface import implements
-        frim zope.component import provideUtility
+        from zope.component import provideUtility
         from Products.CMFPlomino.interfaces import IPlominoSafeDomains
         
         class MySafeDomains:
