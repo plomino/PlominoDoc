@@ -38,10 +38,7 @@ or a :term:`form`, for instance).
     ``plominoContext``, ``context`` can be used identically.
 
 Besides these names, many functions defined in ``PlominoUtils`` are 
-available within the context of a formula. In addition, Plomino sets 
-the ``plomino_form_ids`` key on the ``REQUEST``, which contains a list
-cumulative list of all the forms rendered, with the most recent form last.
-This allows fields on subforms to figure out what form they were rendered from.
+available within the context of a formula. 
 
 Document items should be accessed using the ``getItem()`` method:
 ``plominoDocument.getItem('validationDate')``. 
@@ -95,12 +92,94 @@ As you can see in this example, you can add user ids and/or user roles.
 For a better understanding of the methods available on Plomino objects,
 see below in this document.
 
+Names defined in formulas
+-------------------------
+
+``plominoContext``, ``plominoDocument``
+    The execution context of the formula.
+
+``parent_form_ids``
+    Plomino sets the ``parent_form_ids`` key on the ``REQUEST``, which contains
+    a cumulative list of all the forms rendered, with the most recent form
+    last.  This allows fields on subforms to figure out what form they were
+    rendered from.
+
+``script_id``
+    The computed id of the executing script, e.g.
+    ``field-_-frmTime-_-work_type-_-formula``
+
+``SCRIPT_ID_DELIMITER``
+    The delimited used in computation of script ids. To split a script into its
+    component parts, you can do ``SCRIPT_ID_DELIMITER.split(script_id)``.
+
+Adaptive formulas
+-----------------
+
+Since a formula can figure out what form and field it was called on by
+examining the name of its script, it can adapt to the context.
+
+For example, to create a selection field which is initialised to select all
+its values by default, you can set the *default* formula as follows:
+
+.. code-block:: python
+
+    #Plomino import libConfig
+    return libConfig_getFieldValuesAsDict().keys()
+
+This assumes a script library ``libConfig`` providing functions as follows:
+
+.. code-block:: python
+
+    def libConfig_getFieldValuesAsDict():
+        """ Find the config key based on the calling script name
+        """
+        field_id = libConfig_getFieldId(script_id)
+        return libConfig_getValuesAsDict(field_id)
+
+    def libConfig_getFieldId(script_id):
+        """ Parse field id from script id
+
+        Turn this: `field-_-frmConfiguration-_-pool_construction_date-_-formula`
+        into this: `pool_construction_date`
+        """
+        script_type, form_id, rest = script_id.split(SCRIPT_ID_DELIMITER, 2)
+        field_id, formula = rest.rsplit(SCRIPT_ID_DELIMITER, 1) 
+        #DBG Log('field_id: %s' % field_id, 'libConfig_getFieldId') 
+        return field_id
+
+    def libConfig_getValuesAsDict(key):
+        """ Look up a config value by name, return the value as a dictionary, splitting each line on `separator`.
+
+        If the selection is `['key|value', ...]`, return `{key: value, ...}`.
+        """
+        selection_list = libConfig_getSelectionList(key)
+        d = {}
+        for row in selection_list:
+            (label, selection_key) = row.split(separator)
+            d[selection_key] = label
+        #DBG Log('values for %s: %s' % (key, `d`), 'libConfig_getValuesAsDict') 
+        return d
+
+    def libConfig_getSelectionList(key):
+        """ Get the selection list for this field.
+
+        This will return either:
+        - the literal value or
+        - the result of the selection formula, if there is one.
+        """
+        selection_list = []
+        form_field = frmConfig.getFormField(key)
+        if form_field:
+            selection_list = form_field.getSettings().getSelectionList(config)
+        return selection_list
+
+
 .. _actions:
 
 Actions
 =======
 
-By default, Plomino offers few standard actions (**Exit**, **Save**,
+By default, Plomino offers a few standard actions (**Exit**, **Save**,
 **Delete**, **Edit**, etc.) depending on the object type (document,
 view, form), on the current mode (read mode or edit mode), and on the
 user access rights.
@@ -244,9 +323,9 @@ You can also add more validation criteria in the field's
 
 For instance, in a *Purchase request* application, the maximum authorised
 amount is 1000 euros. You would enter the following formula in the
-``TotalAmount`` field::
+``TotalAmount`` validation field::
 
-    if plominoDocument.TotalAmount>1000: 
+    if plominoDocument.getItem('TotalAmount') >= 1000: 
         return 'The total amount must be under 1000 euros' 
     else: 
         return ''
@@ -876,23 +955,6 @@ you do not want this view to be offered on the database home page, check
 Database
 ========
 
-Refresh a database
-------------------
-
-After copy/paste of views or forms, or deletion of fields, a Plomino
-database may be corrupted.
-
-If so, you have to refresh the database. This will re-build the database
-index entirely, and destroy all the previously compiled Plomino formula
-scripts (the first time a formula is called, it is compiled in a Python
-Script object in the ZODB).
-
-To do so, go to the database :guilabel:`Design` tab, expand the
-:guilabel:`Others` section and click on :guilabel:`Database refresh`.
-
-Refresh also migrates your database to your current Plomino version (if
-Plomino has been upgraded since the database was created).
-
 Design import/export
 --------------------
 
@@ -945,6 +1007,76 @@ Step by step procedure:
 - go to its ZMI / portal_setup / Import page, and at the bottom, import the previously downloaded .tar.gz file,
 - now create a new Plomino database in your site, the default welcome page will provide a list of the available templates, so you can pick one and get its design immediately import in your database.
 - the template selection is also available in the Database design tab.
+
+Refresh a database
+------------------
+
+After copy/paste of views or forms, or deletion of fields, a Plomino
+database may be corrupted.
+
+If so, you have to refresh the database. This will re-build the database
+index entirely, and destroy all the previously compiled Plomino formula
+scripts (the first time a formula is called, it is compiled in a Python
+Script object in the ZODB).
+
+To do so, go to the database :guilabel:`Design` tab, expand the
+:guilabel:`Others` section and click on :guilabel:`Database refresh`.
+
+Refresh also migrates your database to your current Plomino version (if
+Plomino has been upgraded since the database was created).
+
+Database export/import as genericsetup resources
+------------------------------------------------
+
+Databases can be made available as genericsetup resources. 
+The main purpose for this is to allow them to be used as templates 
+when creating a new database, and so they are referred to as 
+**template databases**
+
+Plomino defines *Export Plomino templates* and *Import Plomino templates*
+steps to *genericsetup*.
+
+The export step will search for all Plomino databases contained in the portal.
+If the database has the ``IsDatabaseTemplate`` checkbox ticked, its design 
+will be included in the export.
+There is no difference between a database marked as template and any other
+database, it merely makes the database available as a template.
+
+The databases are written to folders ``plomino/<dbid>/`` in the exported
+resource archive, where ``<dbid>`` is the database id.
+
+Exported database resources can be included e.g. in a Plone skin product. 
+
+When adding a new Plomino database to a Plone instance with such a skin
+installed, templated databases included as resources are offered as starting
+point for the new database.
+
+This is useful in a hosted environment, to make preconfigured Plomino databases
+available as two- or three-click installs (add database, choose template, go)
+as starting point for a user.
+Once imported, the template forms are part of the user's database, and edited
+along with their forms.
+
+For this use, the hoster would have a source Plone instance containing all the
+databases that they want to make available together, for example via a specific
+skin.
+The source Plone serves to define a group of database templates.
+Mark all these databases as templates, and export them as a genericsetup
+resource archive.
+
+
+Start page
+----------
+
+By default, the database default screen is the generic database menu:
+
+.. image:: images/m26047b00.png
+
+But you might prefer to display something else instead (for instance a
+view, a page, a search form, etc.).
+
+In this case, go to your database :guilabel:`Edit` tab, and enter the
+element id in the :guilabel:`Start page` parameter.
 
 Replication
 -----------
@@ -1010,19 +1142,6 @@ column.
     needs to be updated manually, possibly by running an agent that re-saves
     imported documents on a schedule, or by refreshing the database on a
     worker ZEO client instance.
-
-Start page
-----------
-
-By default, the database default screen is the generic database menu:
-
-.. image:: images/m26047b00.png
-
-But you might prefer to display something else instead (for instance a
-view, a page, a search form, etc.).
-
-In this case, go to your database :guilabel:`Edit` tab, and enter the
-element id in the :guilabel:`Start page` parameter.
 
 Plomino URLs
 ============

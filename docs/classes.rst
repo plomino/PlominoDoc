@@ -117,7 +117,7 @@ PlominoDocument
     deletes the document, and if ``REQUEST`` contains a key named
     ``returnurl``, uses its value to redirect the client.
 
-``deleteAttachment(self,` `REQUEST)``
+``deleteAttachment(self, REQUEST)``
     remove file object and update corresponding item value.
 
 ``getfile(self, filename=None, REQUEST=None)``
@@ -151,7 +151,7 @@ PlominoDocument
     returned by ``getForm()``). If ``convertattachments`` is ``True``,
     FileAttachments items are converted to text (if possible).
 
-``hasItem(self,` `name)``
+``hasItem(self, name)``
     returns ``True`` if the item exists in the document.
 
 ``isAuthor(self)``
@@ -170,11 +170,11 @@ PlominoDocument
     ``True``), so it can be used transparently in any formula to know if
     the document is being created or not.
 
-``openWithForm(self,` `form,` `editmode=False)``
+``openWithForm(self, form, editmode=False)``
     display the document using the given form's layout (but first, check
     if the user has proper access rights).
 
-``removeItem(self,` `name)``
+``removeItem(self, name)``
     remove the item.
 
 ``save(self, form=None, creation=False, refresh_index=True)``
@@ -252,7 +252,7 @@ PlominoIndex
     reference). The returned objects are ZCatalog brains pointing to the
     documents (see ZCatalog reference).
 
-``getKeyUniqueValues(self,` `key)``
+``getKeyUniqueValues(self, key)``
     returns the list of distinct values for an indexed field.
 
 ``getParentDatabase(self)``
