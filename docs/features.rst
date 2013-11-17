@@ -106,10 +106,11 @@ Names defined in formulas
 
 ``script_id``
     The computed id of the executing script, e.g.
-    ``field-_-frmTime-_-work_type-_-formula``
+    ``field_-_frmTime_-_work_type_-_formula``. 
+    See ``SCRIPT_ID_DELIMITER``.
 
 ``SCRIPT_ID_DELIMITER``
-    The delimited used in computation of script ids. To split a script into its
+    The delimiter used in computation of script ids. To split a script into its
     component parts, you can do ``SCRIPT_ID_DELIMITER.split(script_id)``.
 
 Adaptive formulas
@@ -875,13 +876,13 @@ the content in edit mode.
 Specific CSS or JS
 ------------------
 
-If a form needs some specific CSS or JS, they can be mentionned in the form edit
-page in the 2 respective textarea fields (one URL by line).
+If a form needs some specific CSS or JS, they can be mentioned in the form edit
+page in the 2 respective textarea fields (one URL per line).
 
 Those URLs can target:
 
-- an file provided in the theme but not enabled in portal_javascript,
-- a file contained in the Plomino database resources folder,
+- a file provided in the theme but not enabled in ``portal_javascript``,
+- a file contained in the Plomino database ``resources`` folder,
 - an external file (most likely a CDN URL).
 
 Views
@@ -990,42 +991,7 @@ export from the local database to the remote one.
 The principle is the same, you just need to use the :guilabel:`Export`
 section.
 
-Import/export from a GenericSetup profile
------------------------------------------
-
-Plomino provides a GenericSetup export step able to export all databases marked
-as templates into a GenericSetip profile.
-When such a profile is imported, the registered database templates can be used
-to initialize any new db with a ready-to-use design.
-
-Step by step procedure:
-
-- for each database you want to provide as template, go to its Parameters page, and enable "Use as a template",
-- go to your Plone portal ZMI / portal_setup / Export page,
-- select the "Export Plomino templates" step, and click "Export selected steps", it produces a .tar.gz file,
-- go to the Plone site where you want to provide those db templates,
-- go to its ZMI / portal_setup / Import page, and at the bottom, import the previously downloaded .tar.gz file,
-- now create a new Plomino database in your site, the default welcome page will provide a list of the available templates, so you can pick one and get its design immediately import in your database.
-- the template selection is also available in the Database design tab.
-
-Refresh a database
-------------------
-
-After copy/paste of views or forms, or deletion of fields, a Plomino
-database may be corrupted.
-
-If so, you have to refresh the database. This will re-build the database
-index entirely, and destroy all the previously compiled Plomino formula
-scripts (the first time a formula is called, it is compiled in a Python
-Script object in the ZODB).
-
-To do so, go to the database :guilabel:`Design` tab, expand the
-:guilabel:`Others` section and click on :guilabel:`Database refresh`.
-
-Refresh also migrates your database to your current Plomino version (if
-Plomino has been upgraded since the database was created).
-
-Database export/import as genericsetup resources
+Design export/import as genericsetup resources
 ------------------------------------------------
 
 Databases can be made available as genericsetup resources. 
@@ -1034,16 +1000,17 @@ when creating a new database, and so they are referred to as
 **template databases**
 
 Plomino defines *Export Plomino templates* and *Import Plomino templates*
-steps to *genericsetup*.
+steps for *genericsetup*.
 
-The export step will search for all Plomino databases contained in the portal.
+The *export* step will search for all Plomino databases contained in the
+portal.
 If the database has the ``IsDatabaseTemplate`` checkbox ticked, its design 
 will be included in the export.
 There is no difference between a database marked as template and any other
 database, it merely makes the database available as a template.
 
 The databases are written to folders ``plomino/<dbid>/`` in the exported
-resource archive, where ``<dbid>`` is the database id.
+resource archive (``.tar.gz``), where ``<dbid>`` is the database id.
 
 Exported database resources can be included e.g. in a Plone skin product. 
 
@@ -1055,7 +1022,7 @@ This is useful in a hosted environment, to make preconfigured Plomino databases
 available as two- or three-click installs (add database, choose template, go)
 as starting point for a user.
 Once imported, the template forms are part of the user's database, and edited
-along with their forms.
+along with the user's own forms.
 
 For this use, the hoster would have a source Plone instance containing all the
 databases that they want to make available together, for example via a specific
@@ -1064,6 +1031,40 @@ The source Plone serves to define a group of database templates.
 Mark all these databases as templates, and export them as a genericsetup
 resource archive.
 
+Step by step procedure:
+
+- For each database you want to provide as template, go to its
+  :guilabel:`Parameters` page,
+  and enable :guilabel:`Use as a template`.
+- Go to your Plone portal ZMI / portal_setup / Export page,
+- select the :guilabel:`Export Plomino templates` step, and click
+  :guilabel:`Export selected steps`. This produces a ``.tar.gz`` file.
+- Go to the Plone site where you want to provide those db templates,
+- go to its ZMI / portal_setup / Import page, and at the bottom, import the
+  previously downloaded ``.tar.gz`` resource archive file.
+- Now create a new Plomino database in your site. The default welcome page
+  will provide a list of the available templates, so you can pick one and get
+  its design immediately imported in your database.
+- the template selection is also available in the :guilabel:`Database Design`
+  tab.
+
+
+Refresh a database
+------------------
+
+After copy/paste of views or forms, or deletion of fields, a Plomino
+database may be out of date.
+
+If so, you have to refresh the database. This will re-build the database
+index entirely, and replace all the previously compiled Plomino formula
+scripts (the first time a formula is called, it is compiled in a Python
+Script object in the ZODB).
+
+To do so, go to the database :guilabel:`Design` tab, expand the
+:guilabel:`Others` section and click on :guilabel:`Database refresh`.
+
+Refresh also migrates your database to your current Plomino version (if
+Plomino has been upgraded since the database was created).
 
 Start page
 ----------
