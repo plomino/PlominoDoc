@@ -31,10 +31,20 @@ has a catalog, a ``documents`` container for all documents, and a
 Positioning
 ===========
 
-Plomino is a **throught-the-web application builder**, hence:
+Plomino is a **through-the-web application builder**, hence:
 
-* it is **not a throught-the-web content-type builder** like `Dexterity <http://plone.org/products/dexterity>`_, which is perfect to create a custom content type but that will always stick to the standard content management scenario, while Plomino allows to implement any custom scenarios,
-* it is **not just a form generator** like `PloneFormGen <http://plone.org/products/ploneformgen>`_, as Plomino provides all the services (data storage, search, automation, import/export, etc.) to build an entire application. And regarding form generation itself, a major difference with PloneFormGen is that Plomino allows to edit the form layout entirely, while PloneFormGen use a fixed pre-defined form layout.
+* It is **not a through-the-web content-type builder** like 
+  `Dexterity <http://plone.org/products/dexterity>`_,
+  which is perfect for creating custom content types that stick
+  to the standard content management scenario. 
+  Plomino allows to implement any custom scenarios.
+* It is **not just a form generator** like 
+  `PloneFormGen <http://plone.org/products/ploneformgen>`_,
+  as Plomino provides all the services (data storage, search, automation,
+  import/export, etc.) to build an entire application.
+  Regarding form generation itself,
+  a major difference with PloneFormGen is that Plomino allows to edit the form
+  layout entirely, while PloneFormGen uses a fixed pre-defined form layout.
 
 A closer look
 =============
