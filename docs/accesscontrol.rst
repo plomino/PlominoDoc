@@ -7,38 +7,49 @@ Standard Plomino access rights
 
 Plomino offers 5 standard access levels for any Plomino database:
 
-- *Reader*: can read any document, perform searches, but cannot create
-  new documents or modify existing ones.
+*Reader*
+    can read any document, perform searches,
+    but cannot create new documents or modify existing ones.
 
-- *Author*: Reader + can create new documents, and modify/delete only
-  documents he/she has created.
+*Author*
+    Reader + can create new documents,
+    and modify/delete only documents he/she has created.
 
-- *Editor*: Author + can modify/delete any documents.
+*Editor*
+    Author + can modify/delete any documents.
 
-- *Designer*: Editor + can change the database design but formulas.
+*Designer*
+    Editor + can change the database design, but cannot edit formulas.
 
-- *Manager*: Designer + can change formulas + can change the access rights.
+*Manager*
+    Designer + can change formulas + can change the access rights.
 
 These rights can be granted to Plone members and/or to Plone groups.
 
-.. Note:: in reality, Designer users can change the formulas, but we just make sure their editing is disabled, so it is not a security restriction, it is just a UI behaviour useful to make unexperimented users can easily modify a form layout without breaking the Python code in the different formuals.
+.. Note:: in reality, Designer users could in fact edit formulas,
+    we just hide the editing UI.
+    So the Designer role is not a security restriction,
+    it is just a UI behaviour useful to allow non-coder users to easily modify
+    a form layout without breaking the Python code in the different formulas.
 
 Generic users
 =============
 
 Plomino handles 2 types of generic users:
 
-- *Anonymous*: users not authenticated on the Plone site.
+*Anonymous*
+    users not authenticated on the Plone site.
 
-- *Authenticated*: any authenticated user.
+*Authenticated*
+    any authenticated user.
 
 The Plomino standard access rights can be applied to those 2 generic
 users, but an anonymous user will never be able to delete a document.
 
 .. Note:: 
     as nothing can differentiate an anonymous user from another one,
-    this rule allows to make sure no one will delete a document created
-    by someone else.
+    this rule exists to ensure that no one will delete a document created by
+    someone else.
 
 Roles
 =====
