@@ -111,7 +111,7 @@ Names defined in formulas
 
 ``SCRIPT_ID_DELIMITER``
     The delimiter used in computation of script ids. To split a script into its
-    component parts, you can do ``SCRIPT_ID_DELIMITER.split(script_id)``.
+    component parts, you can do ``script_id.split(SCRIPT_ID_DELIMITER)``.
 
 Adaptive formulas
 -----------------
