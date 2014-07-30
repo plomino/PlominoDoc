@@ -325,8 +325,11 @@ PlominoUtils
 ``Now()``
     returns current date and time as a DateTime object.
 
-``open_url(url, asFile=False)``
-    By default, it raises an Unauthorized exception.
+``open_url(url, asFile=False, data=None)``
+    Load the corresponding url, and retrurn the resulting string (or a stream
+    if asFile is True). If data is not None, it will produce a POST request
+    (and data will be url encoded if it is not a string).
+    IMPORTANT: By default, open_url raises an Unauthorized exception.
     If the requested domain (note: it might also be a local path) has been
     declared safe by an local module, it retrieves the content from ``url``.
     To declare a domain as safe::
