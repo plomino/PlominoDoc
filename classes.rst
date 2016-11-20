@@ -351,9 +351,10 @@ PlominoUtils
     translate the given message using the Plone i18n engine (using the
     given domain).
 
-``sendMail(db, recipients, title, html_message, sender=None, cc=None, bcc=None, immediate=False)``
+``sendMail(db, recipients, title, message_in, sender=None, cc=None, bcc=None, immediate=False, msg_format='html')``
     Send a mail to the recipients.
     If sender is None, it will use the current user mail address.
+    By default it accepts a html message, you can submit text instead and supply msg_format='text'.
 
 ``StringToDate(str_d, format='%Y-%m-%d', db=None)``
     Converts a string to a date.  If ``db`` is passed, use the database date
