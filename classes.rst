@@ -16,7 +16,7 @@ PlominoDatabase
     stored in the ``resources`` folder. If the called method allows it, you
     may pass some arguments.
 
-``createDocument(self)``
+``createDocument(self, docid=None)``
     Returns a new empty document.
 
 ``deleteDocument(self, doc)``
